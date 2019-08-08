@@ -11,7 +11,7 @@ import WithDashboard from "./hoc/Dashboard";
 import Login from './containers/login';
 import Register from './containers/register';
 import Comment from './containers/comment';
-import User from './containers/user';
+import { UserList } from './containers/user';
 import { CreateCategory, CategoryList } from './containers/category';
 
 function App() {
@@ -24,7 +24,7 @@ function App() {
 
           <Route path={ROUTES.COMMENTS} component={WithDashboard(Comment)} />
 
-          <Route path={ROUTES.USERS} component={ WithDashboard(User) } />
+          <Route path={ROUTES.USERS} component={ WithDashboard(UserList) } />
 
           <Route path={ROUTES.CREATE_CATEGORY} component={ WithDashboard(CreateCategory) } />
           <Route path={ROUTES.CATEGORIES} component={ WithDashboard(CategoryList) } />

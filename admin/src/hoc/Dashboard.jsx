@@ -20,7 +20,7 @@ const WithDashboardNavigation = (Children) => {
                             <input type="search" placeholder="Entrez votre recherche" onChange={ ({ target: { value }}) => this.handleSearchChange(value) } className="uk-input uk-form-blank" />
                         </div>
                         <div className="uk-padding">
-                            <Children props={this.props} search={this.state.search} />
+                            <Children {...this.props} search={this.state.search} />
                         </div>
                     </div>
                 </div>
