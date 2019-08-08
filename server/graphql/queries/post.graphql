@@ -4,7 +4,8 @@ type Post {
     content: String!
     author: User!
     tags: [Tag!]
-    active: Boolean!
+    is_staff: Boolean!
+    is_active: Boolean!
     draft: Boolean!
     categories: [Category!]
     createdAt: String!

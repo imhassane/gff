@@ -2,7 +2,8 @@ type User {
     _id: ID!
     username: String!
     email: String!
-    password: String!
+    is_active: Boolean
+    is_staff: Boolean
     picture: Picture!
     createdAt: String!
     updatedAt: String!
