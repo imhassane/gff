@@ -1,0 +1,38 @@
+# import Post from './post.graphql'
+# import User from 'user.graphql'
+# import Tag from 'tag.graphql'
+# import Category from 'category.graphql'
+# import Picture from 'picture.graphql'
+
+type Query {
+    posts: [Post!]
+    post(_id: ID!): Post!
+
+    tags: [Tag!]
+    tag(_id: ID!): Tag!
+
+    categories: [Category!]
+    category(_id: ID!): Category!
+
+    users: [User!]
+    user(_id: ID!): User!
+
+}
+
+type Mutation {
+    createUser(username: String!, email: String!, password: String!): User
+    updateUser(_id: ID!, picture: String!): User
+    deleteUser(_id: ID!): User
+
+    createCategory(name: String!, description: String!): Category
+    updateCategory(_id: ID!, name: String!, description: String!): Category
+    deleteCategory(_id: ID!): Category
+
+    createTag(name: String!): Tag
+    updateTag(_id: ID!, name: String!): Tag
+    deleteTag(_id: ID!): Tag
+
+    createPost(title: String!, content: String!, author: String!, tags: [String!], categories: [String!], active: Boolean, draft: Boolean): Post
+    updatePost(_id: ID!, title: String!, content: String!, author: String!, tags: [String!], categories: [String!], active: Boolean, draft: Boolean): Post
+    deletePost(_id: ID!): Post
+}

@@ -1,0 +1,14 @@
+enum PictureType {
+    POST,
+    USER
+}
+
+type Picture {
+    _id: ID!
+    type: PictureType!
+    post: Post!
+    user: User!
+    path: String!
+    createdAt: String!
+    updatedAt: String!
+}
