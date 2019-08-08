@@ -3,7 +3,7 @@ import gql from "graphql-tag";
 
 import client from "../config/apollo";
 
-import { CategoryForm, Category } from "../components/category";
+import { CategoryForm, Category, DeleteCategoryForm } from "../components/category";
 import { Success, Error } from "../components/messages";
 
 export class CreateCategory extends React.Component {
@@ -42,7 +42,7 @@ export class CreateCategory extends React.Component {
                         onDescriptionChange={this.handleDescriptionChange}
                         onSubmit={this.handleFormSubmit}
                         errors={this.state.errors}
-                        values={null}
+                        values={{}}
                         hasChanged={null}
                     />
                 </div>
@@ -87,7 +87,9 @@ export class CategoryList extends React.Component {
         return (
             <div className="uk-grid-small uk-child-width-1-2@m" uk-grid="true">
                 <div>
-                    { this.renderCategories() }
+                    <div className="uk-grid-small uk-flex-left" uk-grid="true">
+                        { this.renderCategories() }
+                    </div>
                 </div>
                 { this.state.showUpdate && (
                     <div>
@@ -105,12 +107,12 @@ class UpdateCategory extends React.Component {
         this.state = { ...props.data, errors: {}, hasChanged: false };
     }
     handleNameChange = (name) => {
-        if(name.length > 3) this.setState({ name, errors: { ...this.state.errors, name: null }, hasChanged: true })
-        else this.setState({ errors: { ...this.state.errors, name: "Le nom de la catégorie doit contenir au moins 3 caractères" } })
+        if(name.length < 3) this.setState({ name, errors: { ...this.state.errors, name: "Le nom de la catégorie doit contenir au moins 3 caractères" } })
+        else this.setState({ name, errors: { ...this.state.errors, name: null }, hasChanged: true }) 
     }
     handleDescriptionChange = (description) => {
         if(description.length > 10) this.setState({ description, hasChanged: true, errors: { ...this.state.errors, description: null } })
-        else this.setState({ errors: { ...this.state.errors, description: "La description de la catégorie doit contenir au moins 10 caractères" } })
+        else this.setState({ description, errors: { ...this.state.errors, description: "La description de la catégorie doit contenir au moins 10 caractères" } })
     }
     handleFormSubmit = () => {
         client.mutate({ mutation: UPDATE_CATEGORY, variables: {
@@ -124,14 +126,55 @@ class UpdateCategory extends React.Component {
         })
     }
     render() {
-        return <CategoryForm
-                    onNameChange={this.handleNameChange}
-                    onDescriptionChange={this.handleDescriptionChange}
-                    values={this.props.data}
-                    errors={this.state.errors}
-                    onSubmit={this.handleFormSubmit}
-                    hasChanged={this.state.hasChanged}
-                />
+        return (
+            <div>
+                <div>
+                    <DeleteCategory _id={this.state._id} />
+                </div>
+                <div>
+                    <h3>Modifier la catégorie</h3>
+                    { this.state.success && <Success message={`La catégorie ${this.state.success} a bien été mise à jour`} /> }
+                    { this.state.errors.message && <Error message={this.state.errors.message} /> }
+                    <CategoryForm
+                        onNameChange={this.handleNameChange}
+                        onDescriptionChange={this.handleDescriptionChange}
+                        values={{
+                            _id: this.state._id,
+                            name: this.state.name,
+                            description: this.state.description
+                        }}
+                        errors={this.state.errors}
+                        onSubmit={this.handleFormSubmit}
+                        hasChanged={this.state.hasChanged}
+                    />
+                </div>
+            </div>
+        )
+    }
+}
+
+class DeleteCategory extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = { errors: {} };
+    }
+    handleFormSubmit = () => {
+        client.mutate({ mutation: DELETE_CATEGORY, variables: { _id: this.props._id }})
+        .then(({ data: { deleteCategory }}) => {
+            this.setState({ success: deleteCategory.name });
+        })
+        .catch((error) => {
+            this.setState({ errors: { message: error.message }})
+        })
+    }
+    render() {
+        return (
+            <div>
+                { this.state.success && <Success message={`La catégorie ${this.state.success} a été supprimée avec succès`} /> }
+                { this.state.errors.message && <Error message={this.state.errors.message} /> }
+                <DeleteCategoryForm onDelete={this.handleFormSubmit} />
+            </div>
+        )
     }
 }
 
@@ -156,6 +199,14 @@ const CREATE_CATEGORY = gql`
 const UPDATE_CATEGORY = gql`
     mutation UpdateCategory($_id: ID!, $name: String!, $description: String!) {
         updateCategory(_id: $_id, name: $name, description: $description) {
+            name
+        }
+    }
+`;
+
+const DELETE_CATEGORY = gql`
+    mutation DeleteCategory($_id: ID!) {
+        deleteCategory(_id: $_id) {
             name
         }
     }
