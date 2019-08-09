@@ -10,7 +10,7 @@ const DashboardNavigation = _ => (
             <li className="uk-nav-header">Gestion des articles</li>
 
             <li>
-                <Link to={ROUTES.POSTS}>Nouvel article</Link>
+                <Link to={ROUTES.CREATE_POST}>Nouvel article</Link>
             </li>
             <li>
                 <Link to={ROUTES.POSTS}>Articles publiés</Link>

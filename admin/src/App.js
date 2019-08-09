@@ -13,6 +13,7 @@ import Register from './containers/register';
 import Comment from './containers/comment';
 import { UserList } from './containers/user';
 import { CreateCategory, CategoryList } from './containers/category';
+import { CreatePost } from "./containers/post";
 
 function App() {
   return (
@@ -28,6 +29,8 @@ function App() {
 
           <Route path={ROUTES.CREATE_CATEGORY} component={ WithDashboard(CreateCategory) } />
           <Route path={ROUTES.CATEGORIES} component={ WithDashboard(CategoryList) } />
+
+          <Route path={ROUTES.CREATE_POST} component={ WithDashboard(CreatePost) } />
 
         </Switch>
       </main>

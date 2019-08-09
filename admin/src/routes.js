@@ -5,6 +5,7 @@ export default {
     HOME: "/dashboard/",
 
     POSTS: "/posts",
+    CREATE_POST: "/create/post/",
     DRAFT: "/draft",
 
     CREATE_CATEGORY: "/create/category/",

@@ -47,6 +47,10 @@ const USERS = gql`
             email
             is_active
             is_staff
+            posts {
+                _id
+                title
+            }
             createdAt
         }
     }
