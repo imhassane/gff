@@ -55,3 +55,10 @@ export const DeleteCategoryForm = ({ onDelete }) => (
         </div>
     </div>
 );
+
+export const CategoryChooserElement = ({ data, onCategorySelected }) => (
+    <div>
+        <input type="checkbox" onChange={ _ => onCategorySelected(data) } />
+        <span>{ data.name }</span>
+    </div>
+);

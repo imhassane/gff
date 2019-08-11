@@ -2,8 +2,9 @@ import React from "react";
 import gql from "graphql-tag";
 
 import client from "../config/apollo";
+import Loader from "../components/loader";
 
-import { CategoryForm, Category, DeleteCategoryForm } from "../components/category";
+import { CategoryForm, Category, DeleteCategoryForm, CategoryChooserElement } from "../components/category";
 import { Success, Error } from "../components/messages";
 
 export class CreateCategory extends React.Component {
@@ -54,7 +55,7 @@ export class CreateCategory extends React.Component {
 export class CategoryList extends React.Component {
     constructor(props){
         super(props);
-        this.state = { categories: [], showUpdate: false, update: {} };
+        this.state = { showUpdate: false, update: {} };
     }
     componentDidMount = async () => {
         try {
@@ -84,18 +85,23 @@ export class CategoryList extends React.Component {
     }
 
     render() {
+        if(!this.state.categories) return <Loader />
         return (
-            <div className="uk-grid-small uk-child-width-1-2@m" uk-grid="true">
-                <div>
-                    <div className="uk-grid-small uk-flex-left" uk-grid="true">
-                        { this.renderCategories() }
-                    </div>
-                </div>
-                { this.state.showUpdate && (
+            <div>
+                <h1>Liste des catégories</h1>
+                <div className="uk-grid-small uk-child-width-1-2@m" uk-grid="true">
                     <div>
-                        <UpdateCategory data={this.state.update} />
+                        <p className="uk-text-meta">{ this.state.categories.length } au total</p>
+                        <div className="uk-grid-small uk-flex-left" uk-grid="true">
+                            { this.renderCategories() }
+                        </div>
                     </div>
-                ) }
+                    { this.state.showUpdate && (
+                        <div>
+                            <UpdateCategory data={this.state.update} />
+                        </div>
+                    ) }
+                </div>
             </div>
         )
     }
@@ -173,6 +179,42 @@ class DeleteCategory extends React.Component {
                 { this.state.success && <Success message={`La catégorie ${this.state.success} a été supprimée avec succès`} /> }
                 { this.state.errors.message && <Error message={this.state.errors.message} /> }
                 <DeleteCategoryForm onDelete={this.handleFormSubmit} />
+            </div>
+        )
+    }
+}
+
+export class ChooseCategory extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {errors: {}, selectedCategories: {} };
+    }
+    componentDidMount = async () => {
+        try {
+            let { data: { categories } } = await client.query({ query: CATEGORIES_QUERY });
+            this.setState({ categories });
+        } catch({ message }) {
+            this.setState({ errors: { ...this.state.errors, message }})
+        }
+    }
+    handleCategoryChoose = (data) => {
+        let { selectedCategories } = this.state;
+        if(Object.keys(selectedCategories).includes(data._id) === true) delete selectedCategories[data._id];
+        else selectedCategories[data._id] = data;
+        this.setState({ selectedCategories });
+    }
+    renderCategories = () => {
+        let { categories } = this.state;
+        categories = categories.map((d, k) => <CategoryChooserElement onCategorySelected={this.handleCategoryChoose} data={d} key={k} />)
+        return (
+            <div>{ categories }</div>
+        )
+    }
+    render() {
+        if(!this.state.categories) return <Loader />
+        return (
+            <div>
+                { this.renderCategories() }
             </div>
         )
     }
