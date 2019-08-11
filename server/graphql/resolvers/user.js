@@ -3,7 +3,7 @@ const { USERNAME_EXIST, EMAIL_EXIST, USER_DOESNT_EXIST } = require('../errors');
 
 const users = async () => {
     try {
-        let _users = await User.find();
+        let _users = await User.find().populate('posts');
         return _users;
     } catch(ex) {
         throw ex;

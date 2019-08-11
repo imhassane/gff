@@ -1,8 +1,10 @@
 const { Post, validatePost } = require('../../models/post');
+const { User } = require('../../models/user');
+const { USER_DOESNT_EXIST } = require('../errors');
 
 const posts = async () => {
     try {
-        let _posts = await Post.find();
+        let _posts = await Post.find().populate('user');
         return _posts;
     } catch(ex) {
         throw ex;
@@ -25,9 +27,18 @@ const createPost = async (parent, data, context) => {
         const { errors } = validatePost(data);
         if(errors) throw new Error(errors.details[0].message);
 
-        let _post = new Post(data);
+        let _author = await User.findOne({ _id: data.author });
+        if(!_author) throw new Error(USER_DOESNT_EXIST);
 
+        let _post = new Post(data);
         _post = await _post.save();
+
+        _post.author = _author;
+        await _post.save();
+
+        _author.posts.push(_post);
+        await _author.save();
+
         return _post;
     } catch(ex) {
         throw ex;

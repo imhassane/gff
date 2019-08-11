@@ -9,6 +9,9 @@ const UserSchema = new mongoose.Schema({
     picture: { type: mongoose.Schema.Types.ObjectId, ref: "Picture" },
     is_staff: { type: Boolean, default: false },
     is_active: { type: Boolean, default: false },
+    posts: [
+        { type: mongoose.Schema.Types.ObjectId, ref: "Post", default: [] }
+    ]
 }, { timestamps: true });
 
 UserSchema.pre('save', function() {

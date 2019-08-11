@@ -25,8 +25,10 @@ const createTag = async (parent, data, context) => {
         const { errors } = validateTag(data);
         if(errors) throw new Error(errors.details[0].message);
 
-        let _tag = new Tag(data);
+        let _tag = await Tag.findOne(data);
+        if(_tag) return _tag;
 
+        _tag = new Tag(data);
         _tag = await _tag.save();
         return _tag;
     } catch(ex) {

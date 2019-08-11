@@ -5,6 +5,7 @@ type User {
     is_active: Boolean
     is_staff: Boolean
     picture: Picture!
+    posts: [Post!]
     createdAt: String!
     updatedAt: String!
 }
