@@ -3,6 +3,8 @@
     import Ads from "./Ads.svelte";
     import Title from "./Title.svelte";
     import Reportages from "./documentaries/ReportagesResume.svelte";
+    import Investigations from "./documentaries/InvestigationsResume.svelte";
+    import Interviews from "./documentaries/InterviewsResume.svelte";
 </script>
 
 <div>
@@ -57,7 +59,7 @@
                     <Title end="Grâce à notre équipe, nous éffectuons des enquêtes dans tout le pays." />
                 </div>
                 <div class="uk-width-2-3@m">
-
+                    <Investigations />
                 </div>
             </div>
         </div>
@@ -73,7 +75,7 @@
             </div>
             <div class="uk-grid-small" uk-grid>
                 <div class="uk-width-2-3@m">
-
+                    <Interviews />
                 </div>
                 <div class="uk-width-1-3@m">
                     <Title end="Nous réalisons des interviews avec des personnes inspirantes et prêtes à changer la donne" />

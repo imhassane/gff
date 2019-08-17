@@ -4,7 +4,10 @@
         <canvas width="200" height="150"></canvas>
     </div>
     <div class="uk-card-body">
-        <h3 class="uk-card-title uk-text-bold"><a href="#/" class="uk-link-reset">{data.title}</a></h3>
+        <h3 class="uk-card-title uk-text-bold">{data.title}</h3>
+        <p>
+            <a href="#/" class="uk-button uk-button-default">Voir l'interview</a>
+        </p>
     </div>
 </div>
 

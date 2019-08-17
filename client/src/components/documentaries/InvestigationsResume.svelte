@@ -5,12 +5,12 @@
         <ul class="uk-slider-items uk-child-width-1-2@s uk-grid">
             
 
-            {#await $investigations}
+            {#await $documentaries}
                 <Loader />
                 {:then response}
                     {#if response.data.documentaries.length === 0}
-                            <Empty message="Aucun reportage pour le moment" />
-                        {/if}
+                        <Empty message="Aucune enquête pour le moment" />
+                    {/if}
                     {#each response.data.documentaries as data }
                         <li class="uk-width-3-4">
                             <Resume data={data} />
@@ -34,15 +34,16 @@
     import { getClient, query } from "svelte-apollo";
     import { gql } from "apollo-boost";
 
-    import Resume from "./ReportageListResume.svelte";
-    
     import Loader from "../general/Loader.svelte";
+    
     import Empty from "../general/Empty.svelte";
     import Error from "../messages/Error.svelte";
 
+    import Resume from "./InvestigationsListResume.svelte";
+
     const INVESTIGATIONS = gql`
         {
-            documentaries(TYPE: "REPORTAGE") {
+            documentaries(TYPE: "INVESTIGATION") {
                 _id
                 title
                 picture { path }
@@ -51,6 +52,10 @@
             }
         }
     `;
+
+    let datas = [], error = null;
+
     const client = getClient();
-    const investigations = query(client, { query: INVESTIGATIONS });
+    const documentaries = query(client, { query: INVESTIGATIONS });
+
 </script>
