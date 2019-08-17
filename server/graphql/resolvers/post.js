@@ -4,18 +4,33 @@ const { USER_DOESNT_EXIST } = require('../errors');
 
 const posts = async () => {
     try {
-        let _posts = await Post.find().populate('user');
+        let _posts = await Post.find().populate('author').populate('comments').sort('-createdAt');
         return _posts;
     } catch(ex) {
         throw ex;
     }
 };
 
+const getPosts = async (parent, data, context) => {
+    try {
+        let _posts = await posts();
+        _posts = _posts.slice(0, data.limit);
+        return _posts;
+    } catch(ex) {
+        throw ex;
+    }
+}
+
 const post = async (parent, data, context) => {
     try {
-        const _post = await Post.findOne(data);
+        const _post = await Post.findOne(data)
+                                .populate('author')
+                                .populate('tags')
+                                .populate('categories')
+                                .populate('comments');
         // Test de l'existance du Post.
-
+        if(!_post) throw new Error(POST_DOESNT_EXIST);
+        
         return _post;
     } catch(ex) {
         throw ex;
@@ -67,6 +82,6 @@ const deletePost = async (parent, data, context) => {
 }
 
 module.exports = {
-    PostQuery: { posts, post },
+    PostQuery: { posts, getPosts, post },
     PostMutation: { createPost, updatePost, deletePost }
 }

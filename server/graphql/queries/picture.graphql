@@ -1,14 +1,15 @@
 enum PictureType {
     POST,
-    USER
+    USER,
+    DOCUMENTARY
 }
 
 type Picture {
     _id: ID!
     type: PictureType!
-    post: Post!
-    user: User!
+    post: Post
+    user: User
     path: String!
-    createdAt: String!
-    updatedAt: String!
+    createdAt: DateTime!
+    updatedAt: DateTime!
 }

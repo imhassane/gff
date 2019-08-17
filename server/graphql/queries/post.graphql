@@ -8,6 +8,7 @@ type Post {
     is_active: Boolean!
     draft: Boolean!
     categories: [Category!]
-    createdAt: String!
-    updatedAt: String!
+    comments: [Comment!]
+    createdAt: DateTime!
+    updatedAt: DateTime!
 }

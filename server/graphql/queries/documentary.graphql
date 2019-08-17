@@ -1,0 +1,16 @@
+enum DocumentaryType {
+    INVESTIGATION,
+    TESTIMONY,
+    REPORTAGE
+}
+type Documentary {
+    _id: ID!
+    TYPE: DocumentaryType
+    title: String!
+    content: String!
+    author: User!
+    url: String!
+    picture: Picture!
+    createdAt: DateTime!
+    updatedAt: DateTime!
+}

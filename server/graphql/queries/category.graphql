@@ -3,6 +3,6 @@ type Category {
     name: String!
     description: String!
     posts: [Post!]
-    createdAt: String!
-    updatedAt: String!
+    createdAt: DateTime!
+    updatedAt: DateTime!
 }

@@ -3,9 +3,14 @@
 # import Tag from 'tag.graphql'
 # import Category from 'category.graphql'
 # import Picture from 'picture.graphql'
+# import Documentary from 'documentary.graphql'
+# import Comment from 'comment.graphql'
+
+scalar DateTime
 
 type Query {
     posts: [Post!]
+    getPosts(limit: Int!): [Post!]
     post(_id: ID!): Post!
 
     tags: [Tag!]
@@ -17,6 +22,15 @@ type Query {
     users: [User!]
     user(_id: ID!): User!
 
+    pictures(type: String!): [Picture]!
+    picture(_id: ID!): Picture!
+
+    documentaries(TYPE: String!): [Documentary]!
+    documentary(_id: ID!): Documentary!
+
+    allComments: [Comment!]
+    comments(post: ID!): [Comment!]
+    comment(_id: ID!): Comment!
 }
 
 type Mutation {
@@ -32,7 +46,18 @@ type Mutation {
     updateTag(_id: ID!, name: String!): Tag
     deleteTag(_id: ID!): Tag
 
+    createPicture(type: String!, path: String!): Picture
+    updatePicture(_id: ID!, path: String!): Picture
+    deletePicture(_id: ID!): Picture
+
     createPost(title: String!, content: String!, author: String!, tags: [String!], categories: [String!], active: Boolean, draft: Boolean): Post
     updatePost(_id: ID!, title: String!, content: String!, author: String!, tags: [String!], categories: [String!], active: Boolean, draft: Boolean): Post
     deletePost(_id: ID!): Post
+
+    createDocumentary(title: String!, content: String!, url: String!, TYPE: String!, author: String!, picture: String!): Documentary
+    updateDocumentary(_id: ID!): Documentary
+    deleteDocumentary(_id: ID!): Documentary
+
+    createComment(username: String!, email: String!, content: String!, comment: ID, post: ID!): Comment
+    deleteComment(_id: ID!): Comment!
 }

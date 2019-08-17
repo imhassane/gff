@@ -9,6 +9,7 @@ const PostSchema = new mongoose.Schema({
     author: { type: mongoose.Schema.Types.ObjectId, ref:"User", required: true },
     tags: [{ type: mongoose.Schema.Types.ObjectId, ref:"Tag", required: true }],
     categories: [{ type: mongoose.Schema.Types.ObjectId, ref:"Category", required: true }],
+    comments: [ { type: mongoose.Schema.Types.ObjectId, ref: "Comment" } ],
 }, { timestamps: true });
 
 const Post = mongoose.model('Post', PostSchema);

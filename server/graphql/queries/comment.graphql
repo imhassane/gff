@@ -1,11 +1,11 @@
-type User {
+type Comment {
     _id: ID!
     username: String!
     email: String!
-    is_active: Boolean
-    is_staff: Boolean
-    picture: Picture!
-    posts: [Post!]
+    content: String!
+    comments: [Comment!]
+    post: Post
+    comment: Comment
     createdAt: DateTime!
     updatedAt: DateTime!
 }
