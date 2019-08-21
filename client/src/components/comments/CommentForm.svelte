@@ -53,7 +53,7 @@
         if(content.length < 10) errorContent = "Votre commentaire est trop court: au moins 10 caractères";
         else errorContent = "";
 
-        if(!errorUsername.length && !errorEmail.lenght && !errorContent.length) valid = true
+        if(!errorUsername.length && !errorEmail.length && !errorContent.length) valid = true
         else valid = false;
 
         if(valid) addComment();

@@ -6,6 +6,7 @@ type Comment {
     comments: [Comment!]
     post: Post
     comment: Comment
+    valid: Boolean!
     createdAt: DateTime!
     updatedAt: DateTime!
 }

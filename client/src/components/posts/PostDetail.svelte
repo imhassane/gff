@@ -2,7 +2,7 @@
     <h1 class="uk-text-bold">{ data.title }</h1>
 
     <div class="uk-cover-container uk-height-large">
-        <img uk-cover src="http://scd.rfi.fr/sites/filesrfi/imagecache/rfi_16x9_1024_578/sites/images.rfi.fr/files/aef_image/cessou_0.jpg" alt="">
+        <img uk-cover src="" alt="">
     </div>
 
     <div class="uk-margin uk-text-justify">
@@ -15,4 +15,5 @@
 
 <script>
     export let data;
+    console.log(data)
 </script>

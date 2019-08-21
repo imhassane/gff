@@ -14,6 +14,7 @@
   "dependencies": {
     "apollo-boost": "^0.4.4",
     "bulma": "^0.7.5",
+    "draft-js-export-html": "^1.4.1",
     "graphql": "^14.4.2",
     "sirv-cli": "^0.4.4",
     "svelte-apollo": "^0.3.0",

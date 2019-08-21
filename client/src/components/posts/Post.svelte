@@ -3,6 +3,7 @@
     <div>
     
         {#await $post}
+            <Loader />
             {:then response }
                 <div class="uk-grid-small" uk-grid>
                     <div class="uk-width-1-4@m">
@@ -36,7 +37,9 @@
     import Comment from "../comments/Comment.svelte";
     import PostInfo from "./PostInfo.svelte";
     import PostDetail from "./PostDetail.svelte";
+
     import Error from "../messages/Error.svelte";
+    import Loader from "../general/Loader.svelte";
 
     export let params = {};
 
@@ -49,6 +52,7 @@
                 title
                 content
                 author { _id, username, posts { _id } }
+                picture { path }
                 comments { _id, username, content, createdAt }
                 createdAt
             }

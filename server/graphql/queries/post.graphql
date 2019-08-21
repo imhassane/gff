@@ -1,6 +1,7 @@
 type Post {
     _id: ID!
     title: String!
+    slug: String!
     content: String!
     author: User!
     tags: [Tag!]
@@ -8,6 +9,7 @@ type Post {
     is_active: Boolean!
     draft: Boolean!
     categories: [Category!]
+    picture: Picture
     comments: [Comment!]
     createdAt: DateTime!
     updatedAt: DateTime!

@@ -1,5 +1,5 @@
 <nav class="uk-navbar-container" uk-navbar>
-  <div class="uk-navbar-right">
+  <div class="uk-navbar-left">
 
     <ul class="uk-navbar-nav">
     
@@ -22,6 +22,10 @@
 
     </ul>
 
+  </div>
+
+  <div class="uk-navbar-right">
+    <a class="uk-navbar-toggle" href="#modal-full" uk-search-icon uk-toggle></a>
   </div>
 </nav>
 

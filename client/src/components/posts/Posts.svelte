@@ -2,6 +2,7 @@
     <div class="uk-container">
 
         {#await $posts}
+            <Loader />
             {:then response}
                 {#each response.data.posts as post}
                     <PostResume data={post} />
@@ -21,6 +22,8 @@
     import MainContainer from "../general/MainContainer.svelte";
     import PostResume from "./PostResume.svelte";
 
+    import Loader from "../general/Loader.svelte";
+
     const client = getClient();
     const POSTS = gql`
         {
@@ -29,6 +32,7 @@
                 title
                 author { _id, username }
                 comments { _id }
+                picture { path }
                 content
                 createdAt
             }

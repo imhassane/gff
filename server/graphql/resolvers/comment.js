@@ -73,11 +73,20 @@ const createComment = async (parent, data, context) => {
     }
 }
 
+const updateComment = async (parent, data, context) => {
+    try {
+        const _comment = await Comment.findByIdAndUpdate(data._id, { $set: data }, { new: true });
+        return _comment;
+    } catch(ex) {
+        throw ex;
+    }
+}
+
 const deleteComment = async (parent, data, context) => {
     try {
         const _comment = await Comment.findOne(data);
         if(_comment) await Comment.findOneAndRemove(data);
-        return isNull(_comment) ? {} : _comment;
+        return !_comment ? {} : _comment;
     } catch(ex) {
         throw ex;
     }
@@ -85,5 +94,5 @@ const deleteComment = async (parent, data, context) => {
 
 module.exports = {
     CommentQuery: { allComments, comments, comment },
-    CommentMutation: { deleteComment, createComment }
+    CommentMutation: { deleteComment, createComment, updateComment }
 }

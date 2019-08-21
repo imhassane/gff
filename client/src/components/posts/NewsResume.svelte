@@ -5,7 +5,7 @@
         <div class="card-content white-text">
             <span class="uk-card-title uk-text-bold">{ data.title }</span>
             <p class="uk-text-meta">Par <strong>@{ data.author.username }</strong></p>
-            { data.content.slice(0, 80 ) } ...
+            {@html data.content.slice(0, 80 ) } ...
         </div>
 
         <div class="card-action">
