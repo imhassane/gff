@@ -50,11 +50,13 @@ export class TagFinder extends React.Component {
     }
 
     handleTagSelection = (data) => {
-        const { choosenTags } = this.state;
+        let { choosenTags } = this.state;
         let object = {};
         object[data._id] = data;
 
         this.setState({ choosenTags: Object.assign({}, choosenTags, object) });
+        choosenTags = Object.keys(choosenTags);
+        this.props.onTagSelect(choosenTags);
     }
 
     handleTagRemove = (tag) => {
@@ -62,7 +64,8 @@ export class TagFinder extends React.Component {
         let data = choosenTags[tag._id];
         if(data) delete choosenTags[tag._id];
         this.setState({ choosenTags });
-        
+        choosenTags = Object.keys(choosenTags);
+        this.props.onTagSelect(choosenTags);
     }
 
     renderForm = () => {

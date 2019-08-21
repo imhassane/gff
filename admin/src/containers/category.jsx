@@ -202,13 +202,13 @@ export class ChooseCategory extends React.Component {
         if(Object.keys(selectedCategories).includes(data._id) === true) delete selectedCategories[data._id];
         else selectedCategories[data._id] = data;
         this.setState({ selectedCategories });
+        selectedCategories = Object.keys(selectedCategories);
+        this.props.onCategorySelect(selectedCategories);
     }
     renderCategories = () => {
         let { categories } = this.state;
         categories = categories.map((d, k) => <CategoryChooserElement onCategorySelected={this.handleCategoryChoose} data={d} key={k} />)
-        return (
-            <div>{ categories }</div>
-        )
+        return <> { categories } </>
     }
     render() {
         if(!this.state.categories) return <Loader />

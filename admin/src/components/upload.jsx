@@ -18,12 +18,13 @@ export const PostFileUploadForm = ({ onFileUpload }) => {
 }
 
 export const PostFileUploadResume = ({ data }) => (
-    <div>
-        <div>
-            <img src={data.location} alt={data.key} />
+    <React.Fragment>
+        <div className="uk-width-small">
+            <img src={data.path} alt={data.path} />
         </div>
         <div>
-            <span className="uk-text-meta">{data.location}</span>
+            <span className="uk-text-meta">{data.path}</span>
         </div>
-    </div>
+        <hr />
+    </React.Fragment>
 );
