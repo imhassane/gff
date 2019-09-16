@@ -5,12 +5,30 @@
     </div>
 
     <div>
-        <p class="uk-text-meta">Par <strong>{author.username}</strong> / {author.posts.length} articles { author.posts.length > 1 ? "publiés" : "publié" }</p>
-        <p class="uk-text-meta">Ajouté le <strong>{createdAt}</strong></p>
+        <p class="uk-text-meta">Par <strong><a href={`#/author/${author._id}`}>{author.username}</a></strong> / {author.posts.length} articles { author.posts.length > 1 ? "publiés" : "publié" }</p>
+        <p class="uk-text-meta">Ajouté le <strong>{getFormattedDate(createdAt)}</strong></p>
+    </div>
+
+    <div class="uk-margin-small">
+        <p><strong>Publié dans les catégories</strong></p>
+        {#each categories as cat}
+            <Category data={cat} />
+        {/each}
+    </div>
+
+    <div class="uk-margin-small">
+        <p><strong>Liste des tags</strong></p>
+        {#each tags as tag}
+            <Tag data={tag} />
+        {/each}
     </div>
 
 </div>
 
 <script>
-    export let author={}, createdAt="", posts = [], picture="https://st4.depositphotos.com/1028735/22757/v/1600/depositphotos_227577174-stock-illustration-animation-portrait-beautiful-african-woman.jpg";
+    import Category from "../general/Category.svelte";
+    import Tag from "../general/Tag.svelte";
+    import { getFormattedDate } from "../../helpers.js";
+    export let categories=null, tags=null;
+    export let author={}, createdAt="", posts = [],picture="https://st4.depositphotos.com/1028735/22757/v/1600/depositphotos_227577174-stock-illustration-animation-portrait-beautiful-african-woman.jpg";
 </script>

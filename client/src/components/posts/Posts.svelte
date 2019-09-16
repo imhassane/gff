@@ -34,6 +34,7 @@
                 comments { _id }
                 picture { path }
                 content
+                extract
                 createdAt
             }
         }

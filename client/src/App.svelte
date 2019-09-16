@@ -5,17 +5,26 @@
 
 	import Navbar from "./components/Navbar.svelte";
 	import Home from "./components/Home.svelte";
+	import Contact from "./components/contact/Contact.svelte";
+	import User from "./components/user/User.svelte";
 	import PostList from "./components/posts/Posts.svelte";
 	import Post from "./components/posts/Post.svelte";
 	import Footer from "./components/Footer.svelte";
+	import Documentary from "./components/documentaries/Documentary.svelte";
 
 	const client = new ApolloClient({ uri: 'http://localhost:4000/graphql '});
 	setClient(client);
 
 	const routes = {
 		'/': Home,
+		'/contact': Contact,
+
+		'/author/:_id': User,
+
 		'/posts': PostList,
 		'/read/post/:_id': Post,
+
+		'/see/documentary/:_id': Documentary,
 		'*': Home,
 	}
 
@@ -31,7 +40,7 @@
 	}
 </style>
 
-<body class="uk-container uk-container-expand">
+<body>
 	<div>
 		<Navbar />
 		<Router {routes} />

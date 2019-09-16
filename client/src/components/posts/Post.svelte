@@ -10,6 +10,8 @@
                         <PostInfo
                             author={response.data.post.author}
                             createdAt={response.data.post.createdAt}
+                            categories={response.data.post.categories}
+                            tags={response.data.post.tags}
                         />
                     </div>
                     <div class="uk-width-3-4@m">
@@ -54,6 +56,8 @@
                 author { _id, username, posts { _id } }
                 picture { path }
                 comments { _id, username, content, createdAt }
+                tags { _id, name }
+                categories { _id, name }
                 createdAt
             }
         }

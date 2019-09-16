@@ -29,6 +29,8 @@
                 title
                 author { _id, username }
                 content
+                extract
+                picture { path }
             }
         }
     `;

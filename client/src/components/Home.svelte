@@ -11,7 +11,7 @@
 
     <section class="uk-padding">
         <div class="uk-grid-small" uk-grid>
-            <div class="uk-width-3-5@m">
+            <div class="uk-width-1-1">
                 <div>
                     <div class="uk-flex uk-flex-between">
                         <div><Title begin="Nos" end="Actualités" /></div>
@@ -19,10 +19,6 @@
                     </div>
                 </div>
                 <News />
-            </div>
-            <div class="uk-width-2-5@m">
-                <Title begin="Espace" end="Publictaire" />
-                <Ads />
             </div>
         </div>
     </section>

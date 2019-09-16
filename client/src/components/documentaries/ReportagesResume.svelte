@@ -47,6 +47,7 @@
                 title
                 picture { path }
                 content
+                description
                 createdAt
             }
         }
