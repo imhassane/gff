@@ -12,6 +12,7 @@ import client from "../config/apollo";
 import { PostResume } from "../components/post";
 import gql from "graphql-tag";
 import { Success, Error } from "../components/messages";
+import { Title } from "../components/utility";
 
 const hashtagConfig = {
     separator: ' ',
@@ -25,7 +26,7 @@ export class CreatePost extends React.Component {
             editorState: EditorState.createEmpty(),
             title: null,
             tags: [], categories: [],
-            pictures: [],
+            pictures: [], draft: false,
             errors: {}
         };
     }
@@ -44,13 +45,18 @@ export class CreatePost extends React.Component {
     handleTagSelected = (tags) => {
         this.setState({ tags });
     }
+    handleDraftSelect = () => {
+        let { draft } = this.state;
+        draft = !draft;
+        this.setState({ draft });
+    }
     handleSubmit = async () => {
         try {
-            let { editorState, title, tags, categories, pictures } = this.state;
+            let { editorState, title, tags, categories, pictures, draft, extract } = this.state;
             let rawContent = convertToRaw(editorState.getCurrentContent(), hashtagConfig);
             let content = draftToHtml(rawContent);
             
-            let variables = { title, content, tags, categories, pictures, picture: "5d5be1044dfc394ac4dbd930" };
+            let variables = { title, content, tags, categories, pictures, draft, extract, picture: "5d7a0873a9687f34c825b895" };
 
             let { data: { _id } } = await client.mutate({ mutation: CREATE_POST, variables });
             if(_id) this.setState({ success: `L'article ${title} a été publié avec succès`, errors: {} });
@@ -77,7 +83,7 @@ export class CreatePost extends React.Component {
                     <div>
                         <div>
                             <strong>Planification de l'article</strong>
-                            <PostPlanning onSubmit={this.handleSubmit} />
+                            <PostPlanning onDraftSelect={this.handleDraftSelect} onSubmit={this.handleSubmit} />
                         </div>
                         <div className="uk-margin-small">
                             <strong className="uk-margin">Tags</strong>
@@ -91,6 +97,10 @@ export class CreatePost extends React.Component {
                             <strong>Ajouter des fichiers</strong>
                             <PostFileUpload onPictureUpload={this.handlePictureUpload} />
                             <PostUploaded uploads={this.state.pictures} />
+                        </div>
+                        <div>
+                            <strong>Extrait de l'article</strong>
+                            <textarea onChange={({ target: { value }}) => this.setState({ extract: value })} className="uk-textarea"></textarea>
                         </div>
                     </div>
                 </div>
@@ -136,7 +146,7 @@ export class PostList extends React.Component {
         if(!this.state.posts) return <Loader />
         return (
             <div>
-                <h1>Articles publiés</h1>
+                <Title message="Gestion des articles" />
                 <div>
                     { this.renderPosts() }
                 </div>
@@ -162,6 +172,8 @@ const CREATE_POST = gql`
         $tags: [String!],
         $picture: ID!,
         $content: String!,
+        $draft: Boolean!,
+        $extract: String!,
     ) {
         createPost(
             title: $title,
@@ -169,7 +181,9 @@ const CREATE_POST = gql`
             tags: $tags,
             picture: $picture,
             content: $content,
-            author: "5d4c34e388156d472c9b2f4d"
+            draft: $draft,
+            extract: $extract,
+            author: "5d7a08dba9687f34c825b896"
         ) {
             _id
             title

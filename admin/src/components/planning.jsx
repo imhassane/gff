@@ -1,9 +1,9 @@
 import React from "react";
 
-export const PostPlanning = ({ onSubmit }) => (
+export const PostPlanning = ({ onSubmit, onDraftSelect }) => (
     <div className="uk-margin-small">
         <div className="uk-margin-small">
-            <input type="checkbox" />
+            <input type="checkbox" onChange={_=>onDraftSelect()} />
             <span>Brouillon</span>
         </div>
         <div className="uk-margin-small">

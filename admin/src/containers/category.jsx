@@ -6,6 +6,7 @@ import Loader from "../components/loader";
 
 import { CategoryForm, Category, DeleteCategoryForm, CategoryChooserElement } from "../components/category";
 import { Success, Error } from "../components/messages";
+import { Title } from "../components/utility";
 
 export class CreateCategory extends React.Component {
     constructor(props) {
@@ -14,11 +15,11 @@ export class CreateCategory extends React.Component {
     }
     handleNameChange = (name) => {
         if(name.length > 3) this.setState({ name, errors: { ...this.state.errors, name: null } })
-        else this.setState({ errors: { ...this.state.errors, name: "Le nom de la catégorie doit contenir au moins 3 caractères" } })
+        else this.setState({ name, errors: { ...this.state.errors, name: "Le nom de la catégorie doit contenir au moins 3 caractères" } })
     }
     handleDescriptionChange = (description) => {
         if(description.length > 10) this.setState({ description, errors: { ...this.state.errors, description: null } })
-        else this.setState({ errors: { ...this.state.errors, description: "La description de la catégorie doit contenir au moins 10 caractères" } })
+        else this.setState({ description, errors: { ...this.state.errors, description: "La description de la catégorie doit contenir au moins 10 caractères" } })
     }
     handleFormSubmit = () => {
         client.mutate({ mutation: CREATE_CATEGORY, variables: {
@@ -36,7 +37,7 @@ export class CreateCategory extends React.Component {
             <div>
                 { this.state.success && <Success message={`La catégorie ${this.state.success} a été ajoutée avec succès`} /> }
                 { this.state.errors.message && <Error message={this.state.errors.message} /> }
-                <h3>Ajout d'une nouvelle catégorie</h3>
+                <Title message="Ajout d'une nouvelle catégorie" />
                 <div>
                     <CategoryForm
                         onNameChange={this.handleNameChange}
@@ -88,7 +89,7 @@ export class CategoryList extends React.Component {
         if(!this.state.categories) return <Loader />
         return (
             <div>
-                <h1>Liste des catégories</h1>
+                <Title message="Gestion des catégories" />
                 <div className="uk-grid-small uk-child-width-1-2@m" uk-grid="true">
                     <div>
                         <p className="uk-text-meta">{ this.state.categories.length } au total</p>

@@ -19,4 +19,7 @@ export default {
     COMMENTS: "/comments",
 
     MESSAGES: "/feedback",
+
+    DOCUMENTARIES: "/documentaries",
+    CREATE_DOCUMENTARY: "/create/documentary",
 }

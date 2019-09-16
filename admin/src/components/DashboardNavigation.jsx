@@ -7,64 +7,50 @@ const DashboardNavigation = _ => (
     <div className="uk-container uk-card uk-card-secondary uk-card-body" style={{ margin: 0, padding: '10px' }}>
         <ul className="uk-nav-secondary" uk-nav="true">
 
-            <li className="uk-nav-header">Gestion des articles</li>
+            <li className="uk-nav-header">Contenu</li>
 
             <li>
-                <Link to={ROUTES.CREATE_POST}>Nouvel article</Link>
-            </li>
-            <li>
-                <Link to={ROUTES.POSTS}>Articles publiés</Link>
-            </li>
-            <li>
-                <Link to={ROUTES.DRAFT}>Articles en édition</Link>
+                <Link to={ROUTES.POSTS}>Gestion des articles</Link>
             </li>
 
-            <li className="uk-nav-header">Gestion des commentaires</li>
-
             <li>
-                <Link to={ROUTES.COMMENTS}>Tous les commentaires</Link>
-            </li>
-            <li>
-                <Link to={ROUTES.POSTS}>Commentaires non validés</Link>
+                <Link to={ROUTES.DOCUMENTARIES}>Gestion des documentaires</Link>
             </li>
 
-            <li className="uk-nav-header">Gestion des tags</li>
+            <li className="uk-nav-header">Commentaires</li>
+
+            <li>
+                <Link to={ROUTES.COMMENTS}>Gestion des commentaires</Link>
+            </li>
+
+            <li className="uk-nav-header">Tags</li>
 
             <li>
                 <Link to={ROUTES.CREATE_TAG}>Nouveau tag</Link>
             </li>
             <li>
-                <Link to={ROUTES.TAGS}>Tous les tags</Link>
+                <Link to={ROUTES.TAGS}>Gestion des tags</Link>
             </li>
 
-            <li className="uk-nav-header">Gestion des catégories</li>
+            <li className="uk-nav-header">Catégories</li>
 
             <li>
                 <Link to={ROUTES.CREATE_CATEGORY}>Nouvelle catégorie</Link>
             </li>
             <li>
-                <Link to={ROUTES.CATEGORIES}>Toutes les catégories</Link>
+                <Link to={ROUTES.CATEGORIES}>Gestion des catégories</Link>
             </li>
 
-            <li className="uk-nav-header">Gestion des utilisateurs</li>
+            <li className="uk-nav-header">Utilisateurs</li>
 
             <li>
-                <Link to={ROUTES.USERS}>Utilisateurs</Link>
-            </li>
-            <li>
-                <Link to={ROUTES.USERS}>Ajouter un utilisateur</Link>
-            </li>
-            <li>
-                <Link to={ROUTES.USERS}>Supprimer un utilisateur</Link>
+                <Link to={ROUTES.USERS}>Gestion des utilisateurs</Link>
             </li>
 
-            <li className="uk-nav-header">Gestion des fichiers</li>
+            <li className="uk-nav-header">Fichiers</li>
 
             <li>
-                <Link to={ROUTES.POSTS}>Tous les fichiers</Link>
-            </li>
-            <li>
-                <Link to={ROUTES.POSTS}>Supprimer des fichiers</Link>
+                <Link to={ROUTES.POSTS}>Gestion des fichiers</Link>
             </li>
 
             <li className="uk-nav-header">Lecteurs</li>

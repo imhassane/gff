@@ -18,3 +18,9 @@ export const PostResume = ({ data: { title }}) => (
         <hr/>
     </div>
 );
+
+export const DraftSwitcher = () => (
+    <>
+        <h4>Articles en attente</h4>
+    </>
+);

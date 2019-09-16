@@ -16,21 +16,23 @@ export const CategoryForm = ({ onNameChange, onDescriptionChange, onSubmit, erro
     <form className="uk-form-stacked">
         <div className="uk-margin">
             <label htmlFor="name" className="uk-form-label">Nom de la catégorie</label>
-            <input className="uk-input" value={ values.name ? values.name : "" } type="text" onChange={ ({ target: { value } }) => onNameChange(value) } />
+            { values.name && (<p>Valeur actuelle: {values.name} </p>) }
+            <input className="uk-input" type="text" onChange={ ({ target: { value } }) => onNameChange(value) } />
             { errors.name && <Error message={errors.name} />}
         </div>
         <div className="uk-margin">
             <label htmlFor="description" className="uk-form-label">Description de la catégorie</label>
+            { values.description && (<p>Valeur actuelle: {values.description} </p>) }
             <p className="uk-text-meta">
                 La description de la catégorie est fortement conseillée, elle permet à 
                 toute personne de mieux comprendre la catégorie.
             </p>
-            <textarea value={ values.description ? values.description : "" } className="uk-input" style={{ height: '150px' }} onChange={ ({ target: { value } }) => onDescriptionChange(value) } >
+            <textarea className="uk-input" style={{ height: '150px' }} onChange={ ({ target: { value } }) => onDescriptionChange(value) } >
                 
             </textarea>
             { errors.description && <Error message={errors.description } /> }
         </div>
-        <input onClick={ _ => onSubmit() } type="button" value={ values !== null ? "Mettre à jour" : "Ajouter la catégorie" } className="uk-button" />
+        <input onClick={ _ => onSubmit() } type="button" value={ values.name !== null && values.name !== undefined ? "Mettre à jour" : "Ajouter la catégorie" } className="uk-button" />
     </form>
 );
 

@@ -15,6 +15,7 @@ import { UserList } from './containers/user';
 import { CreateCategory, CategoryList } from './containers/category';
 import { CreatePost, PostList } from "./containers/post";
 import { TagList, CreateTag } from "./containers/tag";
+import { DocumentaryList, CreateDocumentary } from './containers/documentaries';
 
 function App() {
   return (
@@ -36,6 +37,9 @@ function App() {
 
           <Route path={ROUTES.TAGS} component={ WithDashboard(TagList) } />
           <Route path={ROUTES.CREATE_TAG} component={ WithDashboard(CreateTag) } />
+
+          <Route path={ROUTES.DOCUMENTARIES} component={ WithDashboard(DocumentaryList) } />
+          <Route path={ROUTES.CREATE_DOCUMENTARY} component={ WithDashboard(CreateDocumentary)} />
 
         </Switch>
       </main>
