@@ -12,7 +12,7 @@ const users = async () => {
 
 const user = async (parent, data, context) => {
     try {
-        const _user = await User.findOne(data);
+        const _user = await User.findOne(data).populate('posts');
         if(!_user) throw new Error(USER_DOESNT_EXIST)
 
         return _user;

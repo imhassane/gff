@@ -1,10 +1,17 @@
 const { Post, validatePost } = require('../../models/post');
 const { User } = require('../../models/user');
-const { USER_DOESNT_EXIST } = require('../errors');
+const { Picture } = require('../../models/picture');
+const { USER_DOESNT_EXIST, POST_DOESNT_EXIST } = require('../errors');
 
 const posts = async () => {
     try {
-        let _posts = await Post.find().populate('author').populate('comments').sort('-createdAt');
+        let _posts = await Post.find()
+                                .populate('author')
+                                .populate('comments')
+                                .populate('picture')
+                                .populate('tags')
+                                .populate('categories')
+                                .sort('-createdAt');
         return _posts;
     } catch(ex) {
         throw ex;
@@ -27,6 +34,7 @@ const post = async (parent, data, context) => {
                                 .populate('author')
                                 .populate('tags')
                                 .populate('categories')
+                                .populate('picture')
                                 .populate('comments');
         // Test de l'existance du Post.
         if(!_post) throw new Error(POST_DOESNT_EXIST);
@@ -62,6 +70,13 @@ const createPost = async (parent, data, context) => {
 
 const updatePost = async (parent, data, context) => {
     try {
+        let { picture } = data;
+        if(picture) {
+            picture = await Picture.findOne({ _id: picture });
+            if(picture) {
+                data.picture = picture;
+            }
+        }
         let _post = await Post.findOneAndUpdate({ _id: data._id }, {
             $set: data
         }, { new: true });

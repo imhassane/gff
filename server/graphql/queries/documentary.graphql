@@ -7,6 +7,7 @@ type Documentary {
     _id: ID!
     TYPE: DocumentaryType
     title: String!
+    description: String!
     content: String!
     author: User!
     url: String!

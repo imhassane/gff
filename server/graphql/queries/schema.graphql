@@ -50,12 +50,12 @@ type Mutation {
     updatePicture(_id: ID!, path: String!): Picture
     deletePicture(_id: ID!): Picture
 
-    createPost(title: String!, content: String!, author: String!, tags: [String!], categories: [String!], active: Boolean, draft: Boolean, picture: ID!): Post
-    updatePost(_id: ID!, title: String!, content: String!, author: String!, tags: [String!], categories: [String!], active: Boolean, draft: Boolean): Post
+    createPost(title: String!, content: String!, extract: String!, author: String!, tags: [String!], categories: [String!], active: Boolean, draft: Boolean, picture: ID!): Post
+    updatePost(_id: ID!, title: String, content: String, author: String, tags: [String!], categories: [String!], active: Boolean, draft: Boolean, picture: ID): Post
     deletePost(_id: ID!): Post
 
-    createDocumentary(title: String!, content: String!, url: String!, TYPE: String!, author: String!, picture: String!): Documentary
-    updateDocumentary(_id: ID!): Documentary
+    createDocumentary(title: String!, description: String!, content: String!, url: String!, TYPE: String!, picture: ID!): Documentary
+    updateDocumentary(_id: ID!, title: String, content: String, url: String, picture: ID, description: String!): Documentary
     deleteDocumentary(_id: ID!): Documentary
 
     createComment(username: String!, email: String!, content: String!, comment: ID, post: ID!): Comment

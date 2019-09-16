@@ -2,6 +2,7 @@ type Post {
     _id: ID!
     title: String!
     slug: String!
+    extract: String!
     content: String!
     author: User!
     tags: [Tag!]

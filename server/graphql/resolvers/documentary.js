@@ -30,7 +30,7 @@ const createDocumentary = async (parent, data, context) => {
         let _documentary = await Documentary.findOne({ url: data.url });
         if(_documentary) throw new Error(DOCUMENTARY_EXIST);
 
-        let _user = await User.findOne({ _id: data.author });
+        let _user = await User.findOne({ _id: "5d7a08dba9687f34c825b896" });
         if(!_user) throw new Error(USER_DOESNT_EXIST);
 
         let _picture = await Picture.findOne({ _id: data.picture });
