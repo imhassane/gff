@@ -1,7 +1,7 @@
 type Contact {
     _id: ID!
-    username: String!
-    website: String!
+    username: String
+    website: String
     email: String!
     object: String!
     message: String!

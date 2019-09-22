@@ -3,7 +3,7 @@ const Joi = require('joi');
 
 const ReaderSchema = new mongoose.Schema({
     email: { type: String, required: true },
-    unsuscribed: { type: Boolean, default: false },
+    deleted: { type: Boolean, default: false },
 }, { timestamps: true });
 
 const Reader = mongoose.model('Reader', ReaderSchema);
