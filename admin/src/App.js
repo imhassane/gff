@@ -5,6 +5,7 @@ import ROUTES from "./routes";
 
 import 'uikit/dist/css/uikit.min.css';
 import 'uikit/dist/js/uikit.min';
+import 'uikit/dist/js/uikit-icons.min';
 
 import WithDashboard from "./hoc/Dashboard";
 
@@ -13,9 +14,10 @@ import Register from './containers/register';
 import { CommentsList } from './containers/comment';
 import { UserList } from './containers/user';
 import { CreateCategory, CategoryList } from './containers/category';
-import { CreatePost, PostList } from "./containers/post";
+import { CreatePost, PostList, UpdatePost } from "./containers/post";
 import { TagList, CreateTag } from "./containers/tag";
 import { DocumentaryList, CreateDocumentary } from './containers/documentaries';
+import { CreateMail } from './containers/contact';
 
 function App() {
   return (
@@ -33,6 +35,7 @@ function App() {
           <Route path={ROUTES.CATEGORIES} component={ WithDashboard(CategoryList) } />
 
           <Route path={ROUTES.CREATE_POST} component={ WithDashboard(CreatePost) } />
+          <Route path={`${ROUTES.UPDATE_POST}:_id`} component={ WithDashboard(UpdatePost) } />
           <Route path={ROUTES.POSTS} component={ WithDashboard(PostList) } />
 
           <Route path={ROUTES.TAGS} component={ WithDashboard(TagList) } />
@@ -40,6 +43,8 @@ function App() {
 
           <Route path={ROUTES.DOCUMENTARIES} component={ WithDashboard(DocumentaryList) } />
           <Route path={ROUTES.CREATE_DOCUMENTARY} component={ WithDashboard(CreateDocumentary)} />
+
+          <Route path={ROUTES.CREATE_MAIL} component={ WithDashboard(CreateMail) } />
 
         </Switch>
       </main>

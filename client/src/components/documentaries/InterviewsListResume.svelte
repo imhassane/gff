@@ -1,13 +1,14 @@
 <div class="uk-card uk-card-default">
     <div class="uk-card-media-top uk-cover-container">
         <img src="{data.picture.path}" alt="" uk-cover />
-        <canvas width="200" height="150"></canvas>
+        <canvas width="200" height="180"></canvas>
     </div>
     <div class="uk-card-body">
-        <h3 class="uk-card-title uk-text-bold">{data.title}</h3>
-        <p>
-            <a href="#/" class="uk-button uk-button-default">Voir l'interview</a>
-        </p>
+        <h3 class="uk-card-title uk-text-bold"><a href="#/" class="uk-link-reset">{data.title}</a></h3>
+        <p>{data.description}</p>
+    </div>
+    <div class="uk-card-footer">
+        <a href={`#/see/documentary/${data._id}`} class="uk-button uk-button-default">Voir l'interview</a>
     </div>
 </div>
 

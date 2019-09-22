@@ -1,10 +1,17 @@
 <MainContainer>
 
+    <div class="uk-breadcrumb uk-margin-small">
+        <li><a href="#/">Accueil</a></li>
+        <li><a href="#/posts">Articles</a></li>
+        <li><a href={`#/read/post/${params._id}`}>{title}</a></li>
+    </div>
+
     <div>
     
         {#await $post}
             <Loader />
             {:then response }
+                { setTitle(response.data.post.title) }
                 <div class="uk-grid-small" uk-grid>
                     <div class="uk-width-1-4@m">
                         <PostInfo
@@ -43,7 +50,7 @@
     import Error from "../messages/Error.svelte";
     import Loader from "../general/Loader.svelte";
 
-    export let params = {};
+    export let params = {}, title =  "";
 
     const client = getClient();
 
@@ -64,4 +71,9 @@
     `;
 
     const post = query(client, { query: POST, variables: params });
+
+    function setTitle(_title) {
+        title = _title;
+        return "";
+    }
 </script>

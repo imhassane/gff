@@ -11,6 +11,7 @@
 	import Post from "./components/posts/Post.svelte";
 	import Footer from "./components/Footer.svelte";
 	import Documentary from "./components/documentaries/Documentary.svelte";
+	import Documentaries from "./components/documentaries/Documentaries.svelte";
 
 	const client = new ApolloClient({ uri: 'http://localhost:4000/graphql '});
 	setClient(client);
@@ -25,6 +26,7 @@
 		'/read/post/:_id': Post,
 
 		'/see/documentary/:_id': Documentary,
+		'/documentaries/type/:type': Documentaries,
 		'*': Home,
 	}
 

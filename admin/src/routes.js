@@ -6,6 +6,7 @@ export default {
 
     POSTS: "/posts",
     CREATE_POST: "/create/post/",
+    UPDATE_POST: "/update/post/",
     DRAFT: "/draft",
 
     CREATE_CATEGORY: "/create/category/",
@@ -19,6 +20,7 @@ export default {
     COMMENTS: "/comments",
 
     MESSAGES: "/feedback",
+    CREATE_MAIL: "/send/mail/",
 
     DOCUMENTARIES: "/documentaries",
     CREATE_DOCUMENTARY: "/create/documentary",

@@ -5,6 +5,7 @@
     import Reportages from "./documentaries/ReportagesResume.svelte";
     import Investigations from "./documentaries/InvestigationsResume.svelte";
     import Interviews from "./documentaries/InterviewsResume.svelte";
+    import NewsLetter from "./newsletter/NewsLetter.svelte";
 </script>
 
 <div>
@@ -29,7 +30,7 @@
         <div class="uk-container">
             <div class="uk-flex uk-flex-between">
                 <div><Title begin="Nos" end="Reportages" /></div>
-                <div><a href="#/" class="uk-button uk-button-default">Voir tous les reportages</a></div>
+                <div><a href="#/documentaries/type/reportage" class="uk-button uk-button-default">Voir tous les reportages</a></div>
             </div>
             <div class="uk-grid-small" uk-grid>
                 <div class="uk-width-2-3@m">
@@ -48,7 +49,7 @@
         <div class="uk-container">
             <div class="uk-flex uk-flex-between">
                 <div><Title begin="Nos" end="Enquêtes" /></div>
-                <div><a href="#/" class="uk-button uk-button-default">Voir toutes les enquêtes</a></div>
+                <div><a href="#/documentaries/type/investigation" class="uk-button uk-button-default">Voir toutes les enquêtes</a></div>
             </div>
             <div class="uk-grid-small" uk-grid>
                 <div class="uk-width-1-3@m">
@@ -67,7 +68,7 @@
         <div class="uk-container">
             <div class="uk-flex uk-flex-between">
                 <div><Title begin="Nos" end="Interviews" /></div>
-                <div><a href="#/" class="uk-button uk-button-default">Voir toutes les interviews</a></div>
+                <div><a href="#/documentaries/type/interview" class="uk-button uk-button-default">Voir toutes les interviews</a></div>
             </div>
             <div class="uk-grid-small" uk-grid>
                 <div class="uk-width-2-3@m">
@@ -112,6 +113,14 @@
 
             </div>
         
+        </div>
+        <hr>
+    </section>
+
+    <section class="uk-section">
+        <div class="uk-container">
+            <div><Title begin="Notre" end="Newsletter" /></div>
+            <NewsLetter />
         </div>
     </section>
 

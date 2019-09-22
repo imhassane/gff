@@ -2,7 +2,7 @@
     import { getClient, query } from "svelte-apollo";
     import { gql } from "apollo-boost";
 
-    import { getFormattedDate } from "../../helpers";
+    import { getFormattedDate, getDocumentaryType } from "../../helpers";
     import Loader from "../general/Loader.svelte";
     import Error from "../messages/Error.svelte";
     
@@ -25,7 +25,7 @@
     {:then response}
     <section class="uk-section uk-section-secondary">
         <div class="uk-container">
-            <h3>{response.data.documentary.title}</h3>
+            <h3>[{getDocumentaryType(response.data.documentary.TYPE)}] {response.data.documentary.title}</h3>
             <p class="uk-text-meta">
                 Ajouté le { getFormattedDate(response.data.documentary.createdAt) }
             </p>
@@ -33,6 +33,12 @@
     </section>
 
     <div class="uk-padding">
+
+        <div class="uk-breadcrumb">
+            <li><a href="#/">Accueil</a></li>
+            <li><a href="#/documentaries">Documentaires</a></li>
+            <li><a href={`#/see/documentary/${params._id}`}>{response.data.documentary.title}</a></li>
+        </div>
 
         <p>
             <button class="uk-button" onclick={`

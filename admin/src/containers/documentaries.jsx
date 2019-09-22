@@ -7,7 +7,7 @@ import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 
 import client from "../config/apollo";
 import { Title } from "../components/utility";
-import { Error } from "../components/messages";
+import { Error, Success } from "../components/messages";
 import gql from "graphql-tag";
 import Loader from "../components/loader";
 import { DocumentaryResume, DocumentaryNavigation, DocumentaryForm } from "../components/documentary";
@@ -37,7 +37,10 @@ export class DocumentaryList extends React.Component {
         await this.getDocumentaries(TYPE);
     }
     renderDocumentaries = () => {
-        let _docs = this.state.documentaries.map((d, k) => (
+        const { documentaries } = this.state;
+        let _docs = documentaries.filter(d => d.title.toLowerCase().includes(this.props.search));
+        
+        _docs = documentaries.map((d, k) => (
             <DocumentaryResume data={d} key={k} />
         ))
         return (
@@ -100,9 +103,10 @@ export class CreateDocumentary extends React.Component {
             let content = draftToHtml(rawContent);
 
             let variables = { title, content, url, description, content, picture, type };
-            console.log(variables)
             let { data: { createDocumentary } } = await client.mutate({ mutation: CREATE, variables });
-            console.log(createDocumentary)
+            if(createDocumentary) {
+                this.setState({ success: `Le documentaire ${title} a été publié`});
+            }
         } catch({ message }) {
             this.setState({ errors: { message, ...this.state.errors }});
         }
@@ -139,8 +143,10 @@ export class CreateDocumentary extends React.Component {
         );
     }
     render() {
+        const { success } = this.state;
         return (
             <>
+                { success && <Success message={success} />}
                 { this.renderForm() }
             </>
         );
