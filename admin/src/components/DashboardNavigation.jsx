@@ -56,13 +56,13 @@ const DashboardNavigation = _ => (
             <li className="uk-nav-header">Lecteurs</li>
 
             <li>
-                <Link to={ROUTES.POSTS}>Abonnés</Link>
+                <Link to={ROUTES.READERS}>Abonnés</Link>
             </li>
             <li>
                 <Link to={ROUTES.CREATE_MAIL}>Envoyer un mail</Link>
             </li>
             <li>
-                <Link to={ROUTES.POSTS}>Messages</Link>
+                <Link to={ROUTES.MESSAGES}>Messages</Link>
             </li>
         </ul>
     </div>

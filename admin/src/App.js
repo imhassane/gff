@@ -18,6 +18,8 @@ import { CreatePost, PostList, UpdatePost } from "./containers/post";
 import { TagList, CreateTag } from "./containers/tag";
 import { DocumentaryList, CreateDocumentary } from './containers/documentaries';
 import { CreateMail } from './containers/contact';
+import { ReaderList } from './containers/reader';
+import { FeedbackList } from './containers/feedback';
 
 function App() {
   return (
@@ -45,6 +47,8 @@ function App() {
           <Route path={ROUTES.CREATE_DOCUMENTARY} component={ WithDashboard(CreateDocumentary)} />
 
           <Route path={ROUTES.CREATE_MAIL} component={ WithDashboard(CreateMail) } />
+          <Route path={ROUTES.READERS} component={ WithDashboard(ReaderList) } />
+          <Route path={ROUTES.MESSAGES} component={ WithDashboard(FeedbackList) } />
 
         </Switch>
       </main>

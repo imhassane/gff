@@ -2,7 +2,7 @@ import React from "react";
 import { Error } from "./messages";
 
 export const CommentTable = props => (
-    <table className="uk-table uk-table-divider">
+    <table className="uk-table uk-table-divider uk-table-small">
         <thead>
             <tr>
                 <th>Selection</th>

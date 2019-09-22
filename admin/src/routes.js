@@ -4,24 +4,26 @@ export default {
 
     HOME: "/dashboard/",
 
-    POSTS: "/posts",
-    CREATE_POST: "/create/post/",
-    UPDATE_POST: "/update/post/",
-    DRAFT: "/draft",
+    POSTS: "/posts/list",
+    CREATE_POST: "/posts/create/",
+    UPDATE_POST: "/posts/update/",
+    DRAFT: "/posts/draft",
 
-    CREATE_CATEGORY: "/create/category/",
-    CATEGORIES: "/categories/",
+    CREATE_CATEGORY: "/categories/create/",
+    CATEGORIES: "/categories/list/",
 
-    CREATE_TAG: "/create/tag/",
-    TAGS: "/tags/",
+    CREATE_TAG: "/tags/create/",
+    TAGS: "/tags/list/",
     
-    USERS: "/users",
+    USERS: "/users/list/",
 
-    COMMENTS: "/comments",
+    COMMENTS: "/comments/list",
 
-    MESSAGES: "/feedback",
-    CREATE_MAIL: "/send/mail/",
+    MESSAGES: "/readers/feedback",
+    CREATE_MAIL: "/readers/mail",
 
     DOCUMENTARIES: "/documentaries",
-    CREATE_DOCUMENTARY: "/create/documentary",
+    CREATE_DOCUMENTARY: "/documentaries/create",
+
+    READERS: "/readers/list",
 }
