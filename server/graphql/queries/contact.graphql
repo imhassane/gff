@@ -1,0 +1,11 @@
+type Contact {
+    _id: ID!
+    username: String!
+    website: String!
+    email: String!
+    object: String!
+    message: String!
+    validated: Boolean!
+    createdAt: DateTime!
+    updatedAt: DateTime!
+}

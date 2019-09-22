@@ -5,6 +5,9 @@
 # import Picture from 'picture.graphql'
 # import Documentary from 'documentary.graphql'
 # import Comment from 'comment.graphql'
+# import Contact from 'contact.graphql'
+# import NewsLetter from 'newsletter.graphql'
+# import Reader from 'reader.graphql'
 
 scalar DateTime
 
@@ -31,6 +34,15 @@ type Query {
     allComments: [Comment!]
     comments(post: ID!): [Comment!]
     comment(_id: ID!): Comment!
+
+    readers: [Reader!]
+    reader(_id: ID, email: String): Reader!
+
+    contacts: [Contact!]
+    contact(_id: ID!): Contact!
+
+    newsletters: [NewsLetter!]
+    newsletter(_id: ID!): NewsLetter!
 }
 
 type Mutation {
@@ -61,4 +73,16 @@ type Mutation {
     createComment(username: String!, email: String!, content: String!, comment: ID, post: ID!): Comment
     updateComment(_id: ID!, valid: Boolean!): Comment
     deleteComment(_id: ID!): Comment!
+
+    createContact(username: String, website: String, email: String!, object: String!, message: String!): Contact
+    updateContact(_id: ID!, validated: Boolean!): Contact
+    deleteContact(_id: ID!): Contact
+
+    createReader(email: String!): Reader,
+    updateReader(_id: ID!, unsuscribed: Boolean!): Reader
+    deleteReader(_id: ID!): Reader
+
+    createNewsLetter(title: String!, content: String!): NewsLetter,
+    updateNewsLetter(_id: ID!, title: String, content: String): NewsLetter,
+    deleteNewsLetter(_id: ID!): NewsLetter
 }

@@ -5,6 +5,9 @@ const { PostQuery, PostMutation } = require('./post');
 const { DocumentaryQuery, DocumentaryMutation } = require('./documentary');
 const { PictureQuery, PictureMutation } = require('./picture');
 const { CommentQuery, CommentMutation } = require('./comment');
+const { ReaderQuery, ReaderMutation } = require('./reader');
+const { NewsLetterQuery, NewsLetterMutation } = require('./newsletter');
+const { ContactQuery, ContactMutation } = require('./contact');
 
 const resolvers = {
     Query: Object.assign({},
@@ -14,16 +17,22 @@ const resolvers = {
                             PostQuery,
                             DocumentaryQuery,
                             PictureQuery,
-                            CommentQuery
+                            CommentQuery,
+                            NewsLetterQuery,
+                            ContactQuery,
+                            ReaderQuery
                         ),
-    Mutation: Object.assign({}, 
+    Mutation: Object.assign({},
                             TagMutation,
                             CategoryMutation,
                             UserMutation,
                             PostMutation,
                             DocumentaryMutation,
                             PictureMutation,
-                            CommentMutation
+                            CommentMutation,
+                            NewsLetterMutation,
+                            ContactMutation,
+                            ReaderMutation
                         ),
 };
 

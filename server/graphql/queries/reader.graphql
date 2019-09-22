@@ -1,0 +1,7 @@
+type Reader {
+    _id: ID!
+    email: String!
+    deleted: Boolean!
+    createdAt: DateTime!
+    updatedAt: DateTime!
+}
