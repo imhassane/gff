@@ -8,10 +8,12 @@ const search = async (parent, data, context) => {
         let _reg = new RegExp(data.text, 'i');
 
         const tags = await Tag.find({ name: { $regex: _reg } });
-        const authors = await User.find({ email: { $regex: _reg } });
+        const authors = await User.find({ email: { $regex: _reg } })
+                                  .populate('picture');
         const categories = await Category.find({ name: { $regex: _reg }});
         const posts = await Post.find({ title: { $regex: _reg }})
-                                .populate('picture');
+                                .populate('picture')
+                                .populate('author');
 
         return { tags, authors, categories, posts };
     } catch(ex) { throw ex; }
