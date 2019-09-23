@@ -14,7 +14,7 @@ export const DocumentaryResume = ({ data}) => (
 
 export const DocumentaryNavigation = () => (
     <div className="uk-flex uk-margin">
-        <li><Link className="uk-button uk-button-default" to={routes.CREATE_DOCUMENTARY}>Ajouter un documentaire</Link></li>
+        <li><Link className="uk-button uk-button-primary" to={routes.CREATE_DOCUMENTARY}>Ajouter un documentaire</Link></li>
     </div>
 );
 

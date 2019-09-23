@@ -17,7 +17,7 @@ import { CreateCategory, CategoryList } from './containers/category';
 import { CreatePost, PostList, UpdatePost } from "./containers/post";
 import { TagList, CreateTag } from "./containers/tag";
 import { DocumentaryList, CreateDocumentary } from './containers/documentaries';
-import { CreateMail } from './containers/contact';
+import { CreateNewsletter, NewsletterList, NewsletterDetail } from './containers/newsletter';
 import { ReaderList } from './containers/reader';
 import { FeedbackList } from './containers/feedback';
 
@@ -46,7 +46,9 @@ function App() {
           <Route path={ROUTES.DOCUMENTARIES} component={ WithDashboard(DocumentaryList) } />
           <Route path={ROUTES.CREATE_DOCUMENTARY} component={ WithDashboard(CreateDocumentary)} />
 
-          <Route path={ROUTES.CREATE_MAIL} component={ WithDashboard(CreateMail) } />
+          <Route path={ROUTES.LIST_NEWSLETTER} component={ WithDashboard(NewsletterList) } />
+          <Route path={`${ROUTES.DETAIL_NEWSLETTER}:_id`} component={ WithDashboard(NewsletterDetail) } />
+          <Route path={ROUTES.CREATE_NEWSLETTER} component={ WithDashboard(CreateNewsletter) } />
           <Route path={ROUTES.READERS} component={ WithDashboard(ReaderList) } />
           <Route path={ROUTES.MESSAGES} component={ WithDashboard(FeedbackList) } />
 

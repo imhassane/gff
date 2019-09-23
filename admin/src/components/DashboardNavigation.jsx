@@ -59,7 +59,7 @@ const DashboardNavigation = _ => (
                 <Link to={ROUTES.READERS}>Abonnés</Link>
             </li>
             <li>
-                <Link to={ROUTES.CREATE_MAIL}>Envoyer un mail</Link>
+                <Link to={ROUTES.LIST_NEWSLETTER}>Newsletter</Link>
             </li>
             <li>
                 <Link to={ROUTES.MESSAGES}>Messages</Link>

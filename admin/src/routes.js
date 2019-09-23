@@ -20,7 +20,10 @@ export default {
     COMMENTS: "/comments/list",
 
     MESSAGES: "/readers/feedback",
-    CREATE_MAIL: "/readers/mail",
+
+    CREATE_NEWSLETTER: "/readers/newsletter/create",
+    LIST_NEWSLETTER: "/readers/newsletter/list",
+    DETAIL_NEWSLETTER: "/readers/newsletter/detail/",
 
     DOCUMENTARIES: "/documentaries",
     CREATE_DOCUMENTARY: "/documentaries/create",

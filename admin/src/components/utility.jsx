@@ -20,6 +20,8 @@ export const Title = ({ message }) => (
     </>
 );
 
+export const DataCounter = ({ total, type }) => <p className="uk-text-meta uk-margin">{ total } { type}{total > 1 ? "s": ""} au total</p>
+
 export const Empty = ({ message }) => <p>{ message }</p>;
 
 export const FormattedDate = ({ date }) => (

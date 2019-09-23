@@ -11,3 +11,10 @@ export const Success = ({ message }) => (
         <p>{ message }</p>
     </div>
 );
+
+export const Messages = ({ success, error }) => (
+    <>
+        { success && <Success message={success} />}
+        { error && <Error message={error} />}
+    </>
+);
