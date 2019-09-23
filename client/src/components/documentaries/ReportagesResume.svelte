@@ -9,8 +9,8 @@
                 <Loader />
                 {:then response}
                     {#if response.data.documentaries.length === 0}
-                            <Empty message="Aucun reportage pour le moment" />
-                        {/if}
+                        <Empty message="Aucun reportage pour le moment" />
+                    {/if}
                     {#each response.data.documentaries as data }
                         <li class="uk-width-3-4">
                             <Resume data={data} />
