@@ -10,4 +10,6 @@ module.exports = {
 
     RESSOURCE_EXISTS: "Cette ressource existe déjà",
     RESSOURCE_DOESNT_EXIST: "Cette ressource n'existe pas",
+
+    NO_READERS: "Aucun lecteur ne recevra cette newsletter",
 }

@@ -1,5 +1,8 @@
 const { NewsLetter, validateNewsLetter } = require('../../models/newsletter');
-const {  RESSOURCE_DOESNT_EXIST, RESSOURCE_EXISTS } = require('../errors');
+const { Reader } = require('../../models/reader');
+const {  RESSOURCE_DOESNT_EXIST, RESSOURCE_EXISTS, NO_READERS } = require('../errors');
+const { sendMail } = require('../../helpers');
+
 
 const newsletters = async () => {
     try {
@@ -66,7 +69,37 @@ const deleteNewsLetter = async (parent, data, context) => {
     };
 };
 
+const publishNewsLetter = async (parent, data, context) => {
+    try {
+        let _readers = await Reader.find({ deleted: false });
+        if(!_readers.length) throw new Error(NO_READERS);
+
+        let _newsletter = await getNewsLetter(data);
+
+        if(_newsletter.published) return _newsletter;
+
+        let To = _readers.map(r => {
+            let obj = {};
+            obj.Email = r.email;
+            return obj;
+        });
+        
+        const Subject = _newsletter.title;
+        const HTMLPart = _newsletter.content;
+
+        try {
+            const data = await sendMail({To, Subject, HTMLPart});
+            if(data) {
+                _newsletter.published = true;
+                _newsletter = await _newsletter.save();
+            }
+        } catch(ex) { throw ex; }
+
+        return _newsletter;
+    } catch(ex) { throw ex; }
+};
+
 module.exports = {
     NewsLetterQuery: { newsletters, newsletter },
-    NewsLetterMutation: { createNewsLetter, updateNewsLetter, deleteNewsLetter }
+    NewsLetterMutation: { createNewsLetter, updateNewsLetter, deleteNewsLetter, publishNewsLetter }
 };

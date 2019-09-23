@@ -85,4 +85,5 @@ type Mutation {
     createNewsLetter(title: String!, content: String!): NewsLetter,
     updateNewsLetter(_id: ID!, title: String, content: String): NewsLetter,
     deleteNewsLetter(_id: ID!): NewsLetter
+    publishNewsLetter(_id: ID!): NewsLetter
 }
