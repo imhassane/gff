@@ -1,12 +1,13 @@
 <script>
     import { getClient, query } from "svelte-apollo";
     import { gql } from "apollo-boost";
+    import { Link } from "svero";
 
     import { getFormattedDate, getDocumentaryType } from "../../helpers";
     import Loader from "../general/Loader.svelte";
     import Error from "../messages/Error.svelte";
     
-    export let params = {};
+    export let router = {};
 
     const client = getClient();
     const QUERY = gql`
@@ -17,7 +18,7 @@
         }
     `;
 
-    const post = query(client, { query: QUERY, variables: params });
+    const post = query(client, { query: QUERY, variables: router.params });
 </script>
 
 {#await $post}
@@ -35,9 +36,9 @@
     <div class="uk-padding">
 
         <div class="uk-breadcrumb">
-            <li><a href="#/">Accueil</a></li>
-            <li><a href="#/documentaries">Documentaires</a></li>
-            <li><a href={`#/see/documentary/${params._id}`}>{response.data.documentary.title}</a></li>
+            <li><Link href="/">Accueil</Link></li>
+            <li><Link href="/documentaries">Documentaires</Link></li>
+            <li><Link href={`/documentaries/watch/${router.params._id}`}>{response.data.documentary.title}</Link></li>
         </div>
 
         <p>

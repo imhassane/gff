@@ -13,8 +13,8 @@
             <div class="">
                 <Title begin="Plus" end="D'informations" />
                 <ul class="uk-nav">
-                    <li><a class="grey-text text-lighten-3" href="#/contact">Contact</a></li>
-                    <li><a class="grey-text text-lighten-3" href="#!">Nous suivre</a></li>
+                    <li><a class="grey-text text-lighten-3" href="/contact">Contact</a></li>
+                    <li><a class="grey-text text-lighten-3" href="#">Nous suivre</a></li>
                 </ul>
             </div>
         </div>

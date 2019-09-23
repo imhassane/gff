@@ -5,7 +5,7 @@
     import Loader from "../general/Loader.svelte";
     import Error from "../messages/Error.svelte";
 
-    export let params = {};
+    export let router = {};
 
     const client = getClient();
     const QUERY = gql`
@@ -19,8 +19,7 @@
             }
         }
     `;
-    
-    const documentaries = query(client, { query: QUERY, variables: { type: params.type.toUpperCase() }});
+    const documentaries = query(client, { query: QUERY, variables: { type: router.params.type.toUpperCase() }});
 </script>
 
 {#await $documentaries}

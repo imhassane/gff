@@ -1,6 +1,11 @@
 <MainContainer>
     <div class="uk-container">
 
+        <div class="uk-breadcrumb uk-margin">
+            <li><Link href="/">Accueil</Link></li>
+            <li><Link href="/posts">Articles</Link></li>
+        </div>
+
         {#await $posts}
             <Loader />
             {:then response}
@@ -17,6 +22,7 @@
 <script>
     import { getClient, query } from "svelte-apollo";
     import { gql } from "apollo-boost";
+    import { Link } from "svero";
 
     import Error from "../messages/Error.svelte";
     import MainContainer from "../general/MainContainer.svelte";

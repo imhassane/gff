@@ -1,9 +1,9 @@
 <MainContainer>
 
-    <div class="uk-breadcrumb uk-margin-small">
-        <li><a href="#/">Accueil</a></li>
-        <li><a href="#/posts">Articles</a></li>
-        <li><a href={`#/read/post/${params._id}`}>{title}</a></li>
+    <div class="uk-breadcrumb uk-margin">
+        <li><Link href="/">Accueil</Link></li>
+        <li><Link href="/posts">Articles</Link></li>
+        <li><Link href={`/posts/read/${router.params._id}`}>{title}</Link></li>
     </div>
 
     <div>
@@ -28,7 +28,7 @@
                 
                 <hr />
 
-                <Comment post={params._id} comments={response.data.post.comments} />
+                <Comment post={router.params._id} comments={response.data.post.comments} />
             {:catch error }
                 <Error message={error.message} />
         {/await}
@@ -41,6 +41,7 @@
 <script>
     import { getClient, query } from "svelte-apollo";
     import { gql } from "apollo-boost";
+    import { Link } from "svero";
 
     import MainContainer from "../general/MainContainer.svelte";
     import Comment from "../comments/Comment.svelte";
@@ -50,7 +51,7 @@
     import Error from "../messages/Error.svelte";
     import Loader from "../general/Loader.svelte";
 
-    export let params = {}, title =  "";
+    export let router = {}, title =  "";
 
     const client = getClient();
 
@@ -70,7 +71,7 @@
         }
     `;
 
-    const post = query(client, { query: POST, variables: params });
+    const post = query(client, { query: POST, variables: router.params });
 
     function setTitle(_title) {
         title = _title;

@@ -14,12 +14,12 @@
     </div>
 
     <div class="uk-card-footer">
-        <a class="uk-button uk-button-default" href={`#/read/post/${data._id}`}>Voir cet article</a>
+        <Link class="uk-button uk-button-default" href={`/posts/read/${data._id}`}>Voir cet article</Link>
     </div>
 
 </div>
 
 <script>
-
+    import { Link } from "svero";
     export let data;
 </script>

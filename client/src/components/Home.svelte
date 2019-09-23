@@ -1,4 +1,5 @@
 <script>
+    import { Link } from "svero";
     import News from "./News.svelte";
     import Ads from "./Ads.svelte";
     import Title from "./Title.svelte";
@@ -16,7 +17,7 @@
                 <div>
                     <div class="uk-flex uk-flex-between">
                         <div><Title begin="Nos" end="Actualités" /></div>
-                        <div><a href="#/posts" class="uk-button uk-button-default">Toutes les actualités</a></div>
+                        <div><Link href="/posts" class="uk-button uk-button-default">Toutes les actualités</Link></div>
                     </div>
                 </div>
                 <News />
@@ -30,7 +31,7 @@
         <div class="uk-container">
             <div class="uk-flex uk-flex-between">
                 <div><Title begin="Nos" end="Reportages" /></div>
-                <div><a href="#/documentaries/type/reportage" class="uk-button uk-button-default">Voir tous les reportages</a></div>
+                <div><Link href="/documentaries/type/reportage" class="uk-button uk-button-default">Voir tous les reportages</Link></div>
             </div>
             <div class="uk-grid-small" uk-grid>
                 <div class="uk-width-2-3@m">
@@ -49,7 +50,7 @@
         <div class="uk-container">
             <div class="uk-flex uk-flex-between">
                 <div><Title begin="Nos" end="Enquêtes" /></div>
-                <div><a href="#/documentaries/type/investigation" class="uk-button uk-button-default">Voir toutes les enquêtes</a></div>
+                <div><Link href="/documentaries/type/investigation" class="uk-button uk-button-default">Voir toutes les enquêtes</Link></div>
             </div>
             <div class="uk-grid-small" uk-grid>
                 <div class="uk-width-1-3@m">
@@ -68,7 +69,7 @@
         <div class="uk-container">
             <div class="uk-flex uk-flex-between">
                 <div><Title begin="Nos" end="Interviews" /></div>
-                <div><a href="#/documentaries/type/interview" class="uk-button uk-button-default">Voir toutes les interviews</a></div>
+                <div><Link href="/documentaries/type/interview" class="uk-button uk-button-default">Voir toutes les interviews</Link></div>
             </div>
             <div class="uk-grid-small" uk-grid>
                 <div class="uk-width-2-3@m">

@@ -1,5 +1,6 @@
 <div class="uk-grid-small uk-grid-match uk-child-width-1-2@m" uk-grid>
     {#await $posts}
+        <Loader />
         {:then response}
             {#each response.data.getPosts as post}
                 <div>
@@ -18,6 +19,7 @@
     import { getClient, query } from "svelte-apollo";
     import { gql } from "apollo-boost";
     import PostResume from "./posts/NewsResume.svelte";
+    import Loader from "./general/Loader.svelte";
     import Error from "./messages/Error.svelte";
 
     const client = getClient();

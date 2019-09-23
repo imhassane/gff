@@ -5,7 +5,7 @@
     </div>
 
     <div>
-        <p class="uk-text-meta">Par <strong><a href={`#/author/${author._id}`}>{author.username}</a></strong> / {author.posts.length} articles { author.posts.length > 1 ? "publiés" : "publié" }</p>
+        <p class="uk-text-meta">Par <strong><Link href={`/author/${author._id}`}>{author.username}</Link></strong> / {author.posts.length} articles { author.posts.length > 1 ? "publiés" : "publié" }</p>
         <p class="uk-text-meta">Ajouté le <strong>{getFormattedDate(createdAt)}</strong></p>
     </div>
 
@@ -26,6 +26,7 @@
 </div>
 
 <script>
+    import { Link } from "svero";
     import Category from "../general/Category.svelte";
     import Tag from "../general/Tag.svelte";
     import { getFormattedDate } from "../../helpers.js";
