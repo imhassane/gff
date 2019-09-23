@@ -28,7 +28,7 @@
     <hr/>
 
     <section class="uk-section">
-        <div class="uk-container">
+        <div class="uk-container"  uk-scrollspy="cls: uk-animation-fade; repeat: true; delay: 300">
             <div class="uk-flex uk-flex-between">
                 <div><Title begin="Nos" end="Reportages" /></div>
                 <div><Link href="/documentaries/type/reportage" class="uk-button uk-button-default">Voir tous les reportages</Link></div>
@@ -47,7 +47,7 @@
     <hr />
 
     <section class="uk-section">
-        <div class="uk-container">
+        <div class="uk-container"  uk-scrollspy="cls: uk-animation-fade; repeat: true; delay: 300">
             <div class="uk-flex uk-flex-between">
                 <div><Title begin="Nos" end="Enquêtes" /></div>
                 <div><Link href="/documentaries/type/investigation" class="uk-button uk-button-default">Voir toutes les enquêtes</Link></div>
@@ -66,7 +66,7 @@
     <hr />
 
     <section class="uk-section">
-        <div class="uk-container">
+        <div class="uk-container"  uk-scrollspy="cls: uk-animation-fade; repeat: true; delay: 300">
             <div class="uk-flex uk-flex-between">
                 <div><Title begin="Nos" end="Interviews" /></div>
                 <div><Link href="/documentaries/type/interview" class="uk-button uk-button-default">Voir toutes les interviews</Link></div>
@@ -87,7 +87,7 @@
     <section class="uk-section">
         <div class="uk-container">
 
-            <div class="uk-grid-small uk-grid-match uk-child-width-1-3@m" uk-grid>
+            <div class="uk-grid-small uk-grid-match uk-child-width-1-3@m"  uk-scrollspy="cls: uk-animation-slide-bottom; target: .uk-card; delay: 300; repeat: true" uk-grid>
         
                 <div class="">
                     <div class="uk-card uk-card-default uk-card-body">
@@ -98,7 +98,7 @@
                     </div>
                 </div>
                 <div class="">
-                    <div class="uk-card uk-card-default uk-card-body">
+                    <div class="uk-card uk-card-default uk-card-body"  uk-scrollspy-class="uk-animation-slide-top">
                         <p class="heading h4">
                             Nous disons "Non !" aux injustices liées au sexe ou à l'origine.
                         </p>
@@ -119,7 +119,7 @@
     </section>
 
     <section class="uk-section">
-        <div class="uk-container">
+        <div class="uk-container" uk-scrollspy="cls:uk-animation-fade; repeat: true; delay: 300">
             <div><Title begin="Notre" end="Newsletter" /></div>
             <NewsLetter />
         </div>

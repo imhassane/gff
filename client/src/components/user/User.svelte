@@ -6,7 +6,7 @@
     import Error from "../messages/Error.svelte";
     import UserInfo from "./UserInfo.svelte";
 
-    export let params = {};
+    export let router = {};
     const QUERY = gql`
         query User($_id: ID!){
             user(_id: $_id) {
@@ -23,7 +23,7 @@
     `;
 
     const client = getClient();
-    const author = query(client, { query: QUERY, variables: params });
+    const author = query(client, { query: QUERY, variables: router.params });
 </script>
 
 <div>

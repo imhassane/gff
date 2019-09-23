@@ -1,4 +1,5 @@
 <script>
+  import { Link } from "svero";
   import Search from "./Search.svelte";
 </script>
 
@@ -7,21 +8,21 @@
 
     <ul class="uk-navbar-nav">
     
-        <li><a href="/">Accueil</a></li>
-        <li><a href="/">Présentation</a></li>
-        <li><a href="/">Nos activités</a></li>
+        <li><Link href="/">Accueil</Link></li>
+        <li><Link href="/">Présentation</Link></li>
+        <li><Link href="/">Nos activités</Link></li>
         <li>
-          <a href="/rights">Droits</a>
+          <Link href="/rights">Droits</Link>
           <div class="uk-navbar-dropdown">
             <ul class="uk-nav uk-navbar-dropdown-nav">
-              <li><a href="/rights/men-rights">Droits de l'Homme</a></li>
-              <li><a href="/rights/women-rights">Droits de la femme</a></li>
-              <li><a href="/rights/children-rights">Droits des enfants</a></li>
+              <li><Link href="/rights/men-rights">Droits de l'Homme</Link></li>
+              <li><Link href="/rights/women-rights">Droits de la femme</Link></li>
+              <li><Link href="/rights/children-rights">Droits des enfants</Link></li>
             </ul>
           </div>
         </li>
         <li>
-          <a href="_">Véritas</a>
+          <Link href="/documentaries/type/reportage">Véritas</Link>
           <div class="uk-navbar-dropdown">
             <ul class="uk-nav uk-navbar-dropdown-nav">
               <li><a href="/documentaries/type/reportage">Reportages</a></li>
@@ -30,7 +31,7 @@
             </ul>
           </div>
         </li>
-        <li><a href="/">Apprendre à s'engager</a></li>
+        <li><Link href="/">Apprendre à s'engager</Link></li>
 
     </ul>
 

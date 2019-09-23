@@ -1,6 +1,6 @@
 <div class="uk-grid-small uk-grid-match uk-child-width-1-2@m" uk-grid>
     {#await $posts}
-        <Loader />
+        <p style="width:100px"><Loader /></p>
         {:then response}
             {#each response.data.getPosts as post}
                 <div>
