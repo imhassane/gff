@@ -21,11 +21,9 @@ import { CreateNewsletter, NewsletterList, NewsletterDetail } from './containers
 import { ReaderList } from './containers/reader';
 import { FeedbackList } from './containers/feedback';
 
-function App() {
+function Main() {
   return (
-    <div className="uk-container uk-container-expand" style={{ padding: 0 }}>
-      <main>
-        <Switch>
+    <Switch>
           <Route path={ROUTES.LOGIN} component={Login} />
           <Route path={ROUTES.REGISTER} component={Register} />
 
@@ -53,6 +51,14 @@ function App() {
           <Route path={ROUTES.MESSAGES} component={ WithDashboard(FeedbackList) } />
 
         </Switch>
+  );
+}
+
+function App() {
+  return (
+    <div className="uk-container uk-container-expand" style={{ padding: 0, margin: 0 }}>
+      <main style={{ minHeight: '100%', margin: 0, padding: 0 }}>
+        <Main />
       </main>
     </div>
   );

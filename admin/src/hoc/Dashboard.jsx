@@ -17,7 +17,7 @@ const WithDashboardNavigation = (Children) => {
                     <div className="uk-width-1-5@m">
                         <DashboardNavigation />
                     </div>
-                    <div className="uk-width-4-5@m uk-container">
+                    <div className="uk-width-4-5@m uk-container" uk-height-viewport="true">
                         <div className="uk-padding-small">
                             <div className="uk-grid-small" uk-grid="true">
                                 <div className="uk-width-3-5@m">
