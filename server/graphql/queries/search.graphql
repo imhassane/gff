@@ -1,0 +1,6 @@
+type Search {
+    tags: [Tag!]
+    categories: [Category!]
+    posts: [Post!]
+    authors: [User!]
+}

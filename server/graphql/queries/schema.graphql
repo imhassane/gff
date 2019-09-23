@@ -8,6 +8,7 @@
 # import Contact from 'contact.graphql'
 # import NewsLetter from 'newsletter.graphql'
 # import Reader from 'reader.graphql'
+# import Search from 'search.graphql'
 
 scalar DateTime
 
@@ -43,6 +44,8 @@ type Query {
 
     newsletters: [NewsLetter!]
     newsletter(_id: ID!): NewsLetter!
+
+    search(text: String!): Search!
 }
 
 type Mutation {

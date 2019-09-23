@@ -8,6 +8,7 @@ const { CommentQuery, CommentMutation } = require('./comment');
 const { ReaderQuery, ReaderMutation } = require('./reader');
 const { NewsLetterQuery, NewsLetterMutation } = require('./newsletter');
 const { ContactQuery, ContactMutation } = require('./contact');
+const { SearchQuery } = require('./search');
 
 const resolvers = {
     Query: Object.assign({},
@@ -20,7 +21,8 @@ const resolvers = {
                             CommentQuery,
                             NewsLetterQuery,
                             ContactQuery,
-                            ReaderQuery
+                            ReaderQuery,
+                            SearchQuery
                         ),
     Mutation: Object.assign({},
                             TagMutation,
