@@ -11,6 +11,7 @@ import WithDashboard from "./hoc/Dashboard";
 
 import Login from './containers/login';
 import Register from './containers/register';
+import { Home } from "./components/home";
 import { CommentsList } from './containers/comment';
 import { UserList } from './containers/user';
 import { CreateCategory, CategoryList } from './containers/category';
@@ -26,6 +27,7 @@ import { NotificationList } from './containers/notification';
 function Main() {
   return (
     <Switch>
+          <Route exact path="/" component={Home} />
           <Route exact path={ROUTES.LOGIN} component={Login} />
           <Route exact path={ROUTES.REGISTER} component={Register} />
 

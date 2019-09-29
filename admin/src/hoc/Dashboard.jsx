@@ -8,10 +8,14 @@ const WithDashboardNavigation = (Children) => {
         constructor(props) {
             super(props);
             this.state = { search: '' };
+            
+            const token = localStorage.getItem('x-auth-token');
+            if(!token) props.history.push(routes.LOGIN);
         }
         handleSearchChange = (search) => this.setState({ search })
 
         render() {
+            const { search } = this.state;
             return (
                 <div className="uk-grid-small" uk-grid="true">
                     <div className="uk-width-1-5@m">
@@ -29,7 +33,7 @@ const WithDashboardNavigation = (Children) => {
                             </div>
                         </div>
                         <div className="uk-padding">
-                            <Children {...this.props} search={this.state.search} />
+                            <Children {...this.props} search={search} />
                         </div>
                     </div>
                 </div>

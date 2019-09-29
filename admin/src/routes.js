@@ -1,4 +1,5 @@
 export default {
+    DEFAULT_ROUTE: "/posts/list",
     LOGIN: "/login",
     REGISTER: "/register/",
 

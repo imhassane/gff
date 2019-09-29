@@ -7,10 +7,31 @@ const DOCUMENTARY = {
     'REPORTAGE': 'Reportage',
     'INVESTIGATION': 'Enquête'
 };
+const ROLES = {
+    SUPER_USER: "Superviseur",
+    MANAGER: "Manager",
+    AUTHOR: "Auteur",
+    MEMBER: "Membre"
+};
+
+export const DisplayRole = ({role}) => <span>{ROLES[role]}</span>;
 
 export function getFormattedDate(dateToParse) {
     const _date = new Date(Date.parse(dateToParse));
     return `${DAYS[_date.getDay()]}. ${_date.getDate()} ${MONTHS[_date.getMonth()]} ${_date.getFullYear()}`;
+}
+
+export const DisplayDateDiffFromNow = ({date}) => {
+    const _date = new Date(Date.parse(date));
+    const diff = new Date() - _date;
+
+    let _d = {};
+    _d.sec = Math.floor(diff / 1000);
+    _d.min = Math.floor(_d.sec / 60);
+    _d.hour = Math.floor(_d.min / 60);
+    _d.days = Math.floor(_d.hour / 24);
+
+    return <span>{ _d.days } { _d.days > 1 ? "jours" : "jour" }</span>
 }
 
 export const Title = ({ message }) => (

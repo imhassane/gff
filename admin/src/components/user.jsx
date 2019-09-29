@@ -1,4 +1,5 @@
 import React from "react";
+import { DisplayRole, DisplayDateDiffFromNow } from "./utility";
 
 export const ProfileResume = ({ data: { _id, username, email, is_active, is_staff, posts } }) => (
     <div className="uk-card uk-card-default uk-grid-collapse uk-margin" uk-grid="true">
@@ -14,3 +15,28 @@ export const ProfileResume = ({ data: { _id, username, email, is_active, is_staf
         </div>
     </div>
 );
+
+export const UserTable = props => (
+    <table className=" uk-margin uk-table uk-table-divider uk-table-small">
+        <thead>
+            <tr>
+                <th>Nom d'utilisateur</th>
+                <th>Rôle</th>
+                <th>Ancienneté</th>
+                <th>Actif</th>
+            </tr>
+        </thead>
+        <tbody>
+            { props.children }
+        </tbody>
+    </table>
+);
+
+export const UserTableElement = ({ data: { _id, username, createdAt, permissions, is_active }}) => (
+    <tr>
+        <td>{ username }</td>
+        <td><DisplayRole role={permissions[0]} /></td>
+        <td><DisplayDateDiffFromNow date={createdAt} /></td>
+        <td>{ is_active ? "Oui" : "Non" }</td>
+    </tr>
+)

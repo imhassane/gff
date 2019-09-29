@@ -3,6 +3,11 @@ import { Link } from "react-router-dom";
 
 import LoginForm from "../components/login";
 import ROUTES from "../routes";
+import client from "../config/apollo";
+import gql from "graphql-tag";
+import { Title } from "../components/utility";
+import { Messages } from "../components/messages";
+import routes from "../routes";
 
 class Login extends React.Component {
     constructor(props) {
@@ -17,22 +22,35 @@ class Login extends React.Component {
         if(password.length > 5) this.setState({ password, errors: { ...this.state.errors, password: null }  })
         else this.setState({ errors: { ...this.state.errors, password: "Le mot de passe doit contenir plus de 5 caractères" }})
     }
-    handleSubmit = () => {
-        console.log(this.state);
+    handleSubmit = async () => {
+        try {
+            const { email, password } = this.state;
+            const variables = { email, password };
+
+            const { data: { authenticate } } = await client.mutate({ mutation: AUTHENTICATE, variables});
+            const { token } = authenticate;
+            // On enregistre le token dans les cookies.
+            localStorage.setItem('x-auth-token', token);
+            this.setState({ success: "Vous allez être redirigé vers la page d'administration", errors: {} });
+            setTimeout(() => this.props.history.push(routes.DEFAULT_ROUTE), 1000);
+            
+        } catch({ message }) { this.setState({ errors: { ...this.state.errors, message }, success: null }); }
     }
     render() {
+        const { errors, success } = this.state;
         return (
             <div className="uk-container uk-position-center">
                 <div>
-                    <h3>Accès à l'espace d'administration</h3>
-                    <div>
+                    <Title message="Accès à la page d'administration" />
+                    <Messages error={errors.message} success={success} />
+                    <>
                         <LoginForm
                             onEmailChange={this.handleEmailChange}
                             onPasswordChange={this.handlePasswordChange}
                             errors={this.state.errors}
                             onFormSubmit={this.handleSubmit}
                         />
-                    </div>
+                    </>
                     <p>
                         <Link to="/">J'ai oublié mon mot de passe!</Link>
                     </p>
@@ -44,5 +62,13 @@ class Login extends React.Component {
         )
     }
 }
+
+const AUTHENTICATE = gql`
+    mutation Authenticate($email: String!, $password: String!) {
+        authenticate(email: $email, password: $password) {
+            token
+        }
+    }
+`;
 
 export default Login;

@@ -1,5 +1,6 @@
 import React from "react";
 import { Error } from "./messages";
+import routes from "../routes";
 
 export const RegisterFormFirstStep = (props) => {
     const { onUsernameChange, onEmailChange, errors, onNextStep, title } = props;
@@ -74,7 +75,7 @@ export const RegisterFormThirdStep = (props) => {
                     { errors.picture && <Error message={errors.picture} /> }
                 </div>
                 <div className="uk-margin">
-                    <input className="uk-button uk-button-secondary" type="button" value="Sauter cette étape" onClick={ _ => props.history.push('/categories/') }/>
+                    <input className="uk-button uk-button-secondary" type="button" value="Sauter cette étape" onClick={ _ => props.history.push(routes.DEFAULT_ROUTE) }/>
                     <input className="uk-button uk-button-danger" type="button" value="Charger l'image et terminer mon inscription" onClick={ _ => onUploadAndSubmit() }/>
                 </div>
             </fieldset>

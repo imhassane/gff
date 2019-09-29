@@ -56,7 +56,8 @@ export class CreatePost extends React.Component {
             let rawContent = convertToRaw(editorState.getCurrentContent(), hashtagConfig);
             let content = draftToHtml(rawContent);
             
-            let variables = { title, content, tags, categories, pictures, draft, extract, picture: "5d7a0873a9687f34c825b895" };
+            const picture = pictures[pictures.length - 1]._id;
+            let variables = { title, content, tags, categories, pictures, draft, extract, picture };
 
             let { data: { _id } } = await client.mutate({ mutation: CREATE_POST, variables });
             if(_id) this.setState({ success: `L'article ${title} a été publié avec succès`, errors: {} });
@@ -295,8 +296,7 @@ const CREATE_POST = gql`
             picture: $picture,
             content: $content,
             draft: $draft,
-            extract: $extract,
-            author: "5d7a08dba9687f34c825b896"
+            extract: $extract
         ) {
             _id
             title
