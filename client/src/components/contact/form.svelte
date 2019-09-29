@@ -45,7 +45,7 @@
 
 </script>
 
-<form class="uk-form-stacked uk-padding-large">
+<form class="uk-form-stacked uk-padding-large" on:submit={ e => e.preventDefault()}>
     <fieldset class="uk-fieldset">
 
         <legend class="uk-legend">Nous contacter</legend>

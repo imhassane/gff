@@ -20,7 +20,7 @@
 <script>
 
     export let post = "", comments = [];
-    comments = comments.reverse();
+    comments = comments.reverse().splice(0, 5);
 
     import CommentForm from "./CommentForm.svelte";
     import CommentDetail from "./CommentDetail.svelte";

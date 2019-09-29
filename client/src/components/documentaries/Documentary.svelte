@@ -37,7 +37,7 @@
 
         <div class="uk-breadcrumb">
             <li><Link href="/">Accueil</Link></li>
-            <li><Link href="/documentaries">Documentaires</Link></li>
+            <li><Link href="#">Documentaires</Link></li>
             <li><Link href={`/documentaries/watch/${router.params._id}`}>{response.data.documentary.title}</Link></li>
         </div>
 

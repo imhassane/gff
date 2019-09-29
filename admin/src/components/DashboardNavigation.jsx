@@ -8,6 +8,16 @@ const DashboardNavigation = _ => (
         <div uk-height-viewport="true" className="uk-container uk-card uk-card-secondary uk-card-body" style={{ margin: 0, padding: '10px' }}>
             <ul className="uk-nav-secondary" uk-nav="true">
 
+                <li className="uk-nav-header">Moi</li>
+                
+                <li>
+                    <Link to="">Mon compte</Link>
+                </li>
+
+                <li>
+                    <Link to={ROUTES.LIST_NOTIFICATION}>Notifications</Link>
+                </li>
+
                 <li className="uk-nav-header">Contenu</li>
 
                 <li>
@@ -16,6 +26,10 @@ const DashboardNavigation = _ => (
 
                 <li>
                     <Link to={ROUTES.DOCUMENTARIES}>Gestion des documentaires</Link>
+                </li>
+
+                <li>
+                    <Link to={ROUTES.PAGES}>Gestion des pages</Link>
                 </li>
 
                 <li className="uk-nav-header">Commentaires</li>

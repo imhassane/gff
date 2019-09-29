@@ -20,35 +20,47 @@ import { DocumentaryList, CreateDocumentary } from './containers/documentaries';
 import { CreateNewsletter, NewsletterList, NewsletterDetail } from './containers/newsletter';
 import { ReaderList } from './containers/reader';
 import { FeedbackList } from './containers/feedback';
+import { PageList, CreatePage, PageDetail, PageUpdate, PageDelete } from './containers/page';
+import { NotificationList } from './containers/notification';
 
 function Main() {
   return (
     <Switch>
-          <Route path={ROUTES.LOGIN} component={Login} />
-          <Route path={ROUTES.REGISTER} component={Register} />
+          <Route exact path={ROUTES.LOGIN} component={Login} />
+          <Route exact path={ROUTES.REGISTER} component={Register} />
 
-          <Route path={ROUTES.COMMENTS} component={ WithDashboard(CommentsList) } />
+          <Route exact path={ROUTES.COMMENTS} component={ WithDashboard(CommentsList) } />
 
-          <Route path={ROUTES.USERS} component={ WithDashboard(UserList) } />
+          <Route exact path={ROUTES.PAGES} component={ WithDashboard(PageList) } />
+          <Route exact path={ROUTES.CREATE_PAGE} component={ WithDashboard(CreatePage) } />
+          <Route exact path={`${ROUTES.PAGE_DETAIL}:_id`} component={ WithDashboard(PageDetail) } />
+          <Route exact path={`${ROUTES.PAGE_UPDATE}:_id`} component={ WithDashboard(PageUpdate) } />
+          <Route exact path={`${ROUTES.PAGE_DELETE}:_id`} component={ WithDashboard(PageDelete) } />
+          
+          <Route exact path={ROUTES.USERS} component={ WithDashboard(UserList) } />
 
-          <Route path={ROUTES.CREATE_CATEGORY} component={ WithDashboard(CreateCategory) } />
-          <Route path={ROUTES.CATEGORIES} component={ WithDashboard(CategoryList) } />
+          <Route exact path={ROUTES.CREATE_CATEGORY} component={ WithDashboard(CreateCategory) } />
+          <Route exact path={ROUTES.CATEGORIES} component={ WithDashboard(CategoryList) } />
 
-          <Route path={ROUTES.CREATE_POST} component={ WithDashboard(CreatePost) } />
-          <Route path={`${ROUTES.UPDATE_POST}:_id`} component={ WithDashboard(UpdatePost) } />
-          <Route path={ROUTES.POSTS} component={ WithDashboard(PostList) } />
+          <Route exact path={ROUTES.CREATE_POST} component={ WithDashboard(CreatePost) } />
+          <Route exact path={`${ROUTES.UPDATE_POST}:_id`} component={ WithDashboard(UpdatePost) } />
+          <Route exact path={ROUTES.POSTS} component={ WithDashboard(PostList) } />
 
-          <Route path={ROUTES.TAGS} component={ WithDashboard(TagList) } />
-          <Route path={ROUTES.CREATE_TAG} component={ WithDashboard(CreateTag) } />
+          <Route exact path={ROUTES.TAGS} component={ WithDashboard(TagList) } />
+          <Route exact path={ROUTES.CREATE_TAG} component={ WithDashboard(CreateTag) } />
 
-          <Route path={ROUTES.DOCUMENTARIES} component={ WithDashboard(DocumentaryList) } />
-          <Route path={ROUTES.CREATE_DOCUMENTARY} component={ WithDashboard(CreateDocumentary)} />
+          <Route exact path={ROUTES.DOCUMENTARIES} component={ WithDashboard(DocumentaryList) } />
+          <Route exact path={ROUTES.CREATE_DOCUMENTARY} component={ WithDashboard(CreateDocumentary)} />
 
-          <Route path={ROUTES.LIST_NEWSLETTER} component={ WithDashboard(NewsletterList) } />
-          <Route path={`${ROUTES.DETAIL_NEWSLETTER}:_id`} component={ WithDashboard(NewsletterDetail) } />
-          <Route path={ROUTES.CREATE_NEWSLETTER} component={ WithDashboard(CreateNewsletter) } />
-          <Route path={ROUTES.READERS} component={ WithDashboard(ReaderList) } />
-          <Route path={ROUTES.MESSAGES} component={ WithDashboard(FeedbackList) } />
+          <Route exact path={ROUTES.LIST_NEWSLETTER} component={ WithDashboard(NewsletterList) } />
+          <Route exact path={`${ROUTES.DETAIL_NEWSLETTER}:_id`} component={ WithDashboard(NewsletterDetail) } />
+          <Route exact path={ROUTES.CREATE_NEWSLETTER} component={ WithDashboard(CreateNewsletter) } />
+          <Route exact path={ROUTES.READERS} component={ WithDashboard(ReaderList) } />
+          <Route exact path={ROUTES.MESSAGES} component={ WithDashboard(FeedbackList) } />
+
+          <Route exact path={ROUTES.LIST_NOTIFICATION} component={ WithDashboard(NotificationList) } />
+          <Route exact path={`${ROUTES.DETAIL_NOTIFICATION}:_id`} component={ WithDashboard(NotificationList) } />
+
 
         </Switch>
   );

@@ -8,7 +8,7 @@
         <p>{data.description}</p>
     </div>
     <div class="uk-card-footer">
-        <a href={`#/see/documentary/${data._id}`} class="uk-button uk-button-default">Voir le reportage</a>
+        <a href={`/documentaries/watch/${data._id}`} class="uk-button uk-button-default">Voir le reportage</a>
     </div>
 </div>
 

@@ -27,3 +27,18 @@ export const Empty = ({ message }) => <p>{ message }</p>;
 export const FormattedDate = ({ date }) => (
     <p>{getFormattedDate(date)}</p>
 );
+
+export const DeleteData = ({ title, onDelete, history }) => (
+    <>
+        <Title message={`Suppression de "${title}"`} />
+        <p className="uk-alert uk-alert-warning">
+            La suppression de cette donnée est irréversible et ne pourra plus être accessible.
+            Cependant certaines données ne seront pas totalement supprimées mais seront conservées dans la
+            base de données afin de conserver les relations entre les données.
+        </p>
+        <div className="uk-margin uk-grid-small uk-child-width-1-5@m" uk-grid="true">
+            <div><button className="uk-button" onClick={ _ => history.goBack() }>Annuler</button></div>
+            <div><button className="uk-button uk-button-danger" onClick={ _ => onDelete()}>Supprimer</button></div>
+        </div>
+    </>
+);

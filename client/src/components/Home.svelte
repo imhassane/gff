@@ -7,6 +7,7 @@
     import Investigations from "./documentaries/InvestigationsResume.svelte";
     import Interviews from "./documentaries/InterviewsResume.svelte";
     import NewsLetter from "./newsletter/NewsLetter.svelte";
+    
 </script>
 
 <div>

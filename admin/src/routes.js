@@ -4,6 +4,12 @@ export default {
 
     HOME: "/dashboard/",
 
+    PAGES: "/pages/list",
+    CREATE_PAGE: "/pages/create",
+    PAGE_DETAIL: "/pages/detail/",
+    PAGE_UPDATE: "/pages/update/",
+    PAGE_DELETE: "/pages/delete/",
+
     POSTS: "/posts/list",
     CREATE_POST: "/posts/create/",
     UPDATE_POST: "/posts/update/",
@@ -29,4 +35,9 @@ export default {
     CREATE_DOCUMENTARY: "/documentaries/create",
 
     READERS: "/readers/list",
+
+    LIST_NOTIFICATION: "/notifications/list",
+    DETAIL_NOTIFICATION: "/notifications/detail/",
+    DELETE_NOTIFICATION: "/notifications/delete/",
+    MARK_ALL_AS_READ_NOTIFICATION: "/notifications/mark-all-as-read/",
 }
