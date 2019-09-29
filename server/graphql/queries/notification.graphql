@@ -1,0 +1,14 @@
+enum EnumNotification {
+    CONTACT, COMMENT
+}
+type Notification {
+    _id: ID!
+    title: String!
+    message: String!
+    type: EnumNotification!
+    seen: Boolean!
+    post: Post
+    contact: Contact
+    createdAt: DateTime!
+    updatedAt: DateTime!
+}

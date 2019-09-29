@@ -1,0 +1,15 @@
+enum PAGE_TYPE {
+    CONTENT,
+    GROUP
+}
+type Page {
+    _id: ID!
+    title: String!
+    slug: String!
+    type: PAGE_TYPE!
+    description: String!
+    content: String
+    posts: [Post!]
+    createdAt: DateTime!
+    updatedAt: DateTime!
+}

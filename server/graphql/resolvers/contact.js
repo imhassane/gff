@@ -1,5 +1,6 @@
 const { Contact, validateContact } = require('../../models/contact');
 const {  RESSOURCE_DOESNT_EXIST, RESSOURCE_EXISTS } = require('../errors');
+const { NotificationMutation: { createNotification} } = require('./notification');
 
 const contacts = async () => {
     try {
@@ -39,6 +40,8 @@ const createContact = async (parent, data, context) => {
 
         _c = new Contact(data);
         _c = await _c.save();
+        const message = `${_c.email} a envoyé un nouveau message`;
+        await createNotification(parent, { contact: _c._id, type: "CONTACT", message, title: message  }, context);
         return _c;
     } catch(ex) {
         throw ex;

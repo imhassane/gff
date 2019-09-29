@@ -9,6 +9,8 @@
 # import NewsLetter from 'newsletter.graphql'
 # import Reader from 'reader.graphql'
 # import Search from 'search.graphql'
+# import Page from 'page.graphql'
+# import Notification from 'notification.graphql'
 
 scalar DateTime
 
@@ -16,6 +18,9 @@ type Query {
     posts: [Post!]
     getPosts(limit: Int!): [Post!]
     post(_id: ID!): Post!
+
+    pages: [Page!]
+    page(_id: ID!): Page!
 
     tags: [Tag!]
     tag(_id: ID!): Tag!
@@ -46,6 +51,9 @@ type Query {
     newsletter(_id: ID!): NewsLetter!
 
     search(text: String!): Search!
+
+    notifications: [Notification!]
+    notification(_id: ID, post: ID, contact: ID): Notification
 }
 
 type Mutation {
@@ -69,6 +77,10 @@ type Mutation {
     updatePost(_id: ID!, title: String, content: String, author: String, tags: [String!], categories: [String!], active: Boolean, draft: Boolean, picture: ID): Post
     deletePost(_id: ID!): Post
 
+    createPage(title: String!, description: String!, type: String!, content: String): Page!
+    updatePage(_id: ID!, title: String, description: String, content: String): Page!
+    deletePage(_id: ID!): Page!
+
     createDocumentary(title: String!, description: String!, content: String!, url: String!, TYPE: String!, picture: ID!): Documentary
     updateDocumentary(_id: ID!, title: String, content: String, url: String, picture: ID, description: String!): Documentary
     deleteDocumentary(_id: ID!): Documentary
@@ -89,4 +101,8 @@ type Mutation {
     updateNewsLetter(_id: ID!, title: String, content: String): NewsLetter,
     deleteNewsLetter(_id: ID!): NewsLetter
     publishNewsLetter(_id: ID!): NewsLetter
+
+    createNotification(title: String!, message: String!, type: String!, post: ID, contact: ID): Notification
+    updateNotification(_id: ID!, seen: Boolean, message: String): Notification
+    deleteNotification(_id: ID!): Notification
 }

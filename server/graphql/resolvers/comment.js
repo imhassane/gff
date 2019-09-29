@@ -1,6 +1,7 @@
 const { Comment, validateComment } = require('../../models/Comment');
 const { Post } = require('../../models/post');
 const { RESSOURCE_DOESNT_EXIST } = require('../errors');
+const { getNotification, NotificationMutation: { updateNotification, createNotification}, NotificationQuery: { notification } } = require('./notification');
 
 const allComments = async (parent, data, context) => {
     try {
@@ -65,6 +66,17 @@ const createComment = async (parent, data, context) => {
         if(comment) {
             comment.comments.push(_comment);
             await comment.save();
+        }
+        // On créé une nouvelle notification.
+        let _notif = await getNotification({ post: post._id });
+        let message;
+
+        if(_notif) {
+            message = `${_comment.username} et ${post.comments.length} autres personnes ont commenté l'article "${post.title}"`;
+            _notif = await updateNotification(parent, { _id: _notif._id, seen: false, title: message, message } , context);
+        } else {
+            message = `${_comment.username} a commenté l'article "${post.title}"`;
+            _notif = await createNotification(parent, { post, message, title: message, type: "COMMENT" }, context);
         }
 
         return _comment;
