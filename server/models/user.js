@@ -7,7 +7,7 @@ const UserSchema = new mongoose.Schema({
     email: { type: String, required: true },
     password: { type: String, required: true },
     picture: { type: mongoose.Schema.Types.ObjectId, ref: "Picture" },
-    is_staff: { type: Boolean, default: false },
+    permissions: { type: [String], enum: ["SUPER_USER", "MANAGER", "AUTHOR", "MEMBER"], default: ["MEMBER"]},
     is_active: { type: Boolean, default: false },
     posts: [
         { type: mongoose.Schema.Types.ObjectId, ref: "Post", default: [] }
@@ -30,7 +30,6 @@ const validateUser = (data) => Joi.validate(data, {
     email: Joi.string().email().required(),
     password: Joi.string().required(),
     picture: Joi.string(),
-    is_staff: Joi.boolean(),
     is_active: Joi.boolean(),
 });
 

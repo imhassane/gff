@@ -1,7 +1,8 @@
 const { Post, validatePost } = require('../../models/post');
 const { User } = require('../../models/user');
 const { Picture } = require('../../models/picture');
-const { USER_DOESNT_EXIST, POST_DOESNT_EXIST } = require('../errors');
+const { POST_DOESNT_EXIST, INVALID_PERMISSION } = require('../errors');
+const { canWrite, canDelete, canUpdate } = require('../../helpers');
 
 const posts = async () => {
     try {
@@ -46,21 +47,17 @@ const post = async (parent, data, context) => {
 };
 
 const createPost = async (parent, data, context) => {
+    if(!canWrite(context.user)) throw new Error(INVALID_PERMISSION);
     try {
         const { errors } = validatePost(data);
         if(errors) throw new Error(errors.details[0].message);
 
-        let _author = await User.findOne({ _id: data.author });
-        if(!_author) throw new Error(USER_DOESNT_EXIST);
-
         let _post = new Post(data);
-        _post = await _post.save();
-
-        _post.author = _author;
+        _post.author = context.user;
         await _post.save();
 
-        _author.posts.push(_post);
-        await _author.save();
+        context.user.posts.push(_post);
+        await context.user.save();
 
         return _post;
     } catch(ex) {
@@ -69,6 +66,7 @@ const createPost = async (parent, data, context) => {
 };
 
 const updatePost = async (parent, data, context) => {
+    if(!canUpdate(context.user)) throw new Error(INVALID_PERMISSION);
     try {
         let { picture } = data;
         if(picture) {
@@ -88,6 +86,7 @@ const updatePost = async (parent, data, context) => {
 };
 
 const deletePost = async (parent, data, context) => {
+    if(!canDelete(context.user)) throw new Error(INVALID_PERMISSION);
     try {
         let _post = await Post.findOneAndRemove(data);
         return _post;

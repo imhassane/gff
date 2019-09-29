@@ -11,6 +11,7 @@
 # import Search from 'search.graphql'
 # import Page from 'page.graphql'
 # import Notification from 'notification.graphql'
+# import Auth from 'auth.graphql'
 
 scalar DateTime
 
@@ -58,8 +59,10 @@ type Query {
 
 type Mutation {
     createUser(username: String!, email: String!, password: String!): User
-    updateUser(_id: ID!, picture: String!): User
+    updateUser(_id: ID!, picture: String!, password: String, is_active: Boolean, permissions:[String!]): User
     deleteUser(_id: ID!): User
+
+    authenticate(email: String!, password: String!): Auth!
 
     createCategory(name: String!, description: String!): Category
     updateCategory(_id: ID!, name: String!, description: String!): Category
@@ -73,8 +76,8 @@ type Mutation {
     updatePicture(_id: ID!, path: String!): Picture
     deletePicture(_id: ID!): Picture
 
-    createPost(title: String!, content: String!, extract: String!, author: String!, tags: [String!], categories: [String!], active: Boolean, draft: Boolean, picture: ID!): Post
-    updatePost(_id: ID!, title: String, content: String, author: String, tags: [String!], categories: [String!], active: Boolean, draft: Boolean, picture: ID): Post
+    createPost(title: String!, content: String!, extract: String!, tags: [String!], categories: [String!], active: Boolean, draft: Boolean, picture: ID!): Post
+    updatePost(_id: ID!, title: String, content: String, tags: [String!], categories: [String!], active: Boolean, draft: Boolean, picture: ID): Post
     deletePost(_id: ID!): Post
 
     createPage(title: String!, description: String!, type: String!, content: String): Page!

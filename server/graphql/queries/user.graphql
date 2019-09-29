@@ -1,9 +1,15 @@
+enum UserPermissions {
+    SUPER_USER,
+    MANAGER,
+    AUTHOR,
+    MEMBER
+}
 type User {
     _id: ID!
     username: String!
     email: String!
     is_active: Boolean
-    is_staff: Boolean
+    permissions: [UserPermissions]!
     picture: Picture!
     posts: [Post!]
     createdAt: DateTime!

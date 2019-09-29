@@ -25,11 +25,9 @@ const Post = mongoose.model('Post', PostSchema);
 const validatePost = (data) => Joi.validate(data, {
     title: Joi.string().required(),
     content: Joi.string().required(),
-    slug: Joi.string(),
     active: Joi.boolean(),
     extract: Joi.string().required(),
     draft: Joi.boolean(),
-    author: Joi.required(),
     tags: Joi.required(),
     categories: Joi.required(),
     picture: Joi.string(),

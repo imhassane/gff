@@ -11,6 +11,7 @@ const { ContactQuery, ContactMutation } = require('./contact');
 const { PageQuery, PageMutation } = require('./page');
 const { SearchQuery } = require('./search');
 const { NotificationQuery, NotificationMutation } = require('./notification');
+const { AuthMutation } = require('./auth');
 
 const resolvers = {
     Query: Object.assign({},
@@ -41,6 +42,7 @@ const resolvers = {
                             ReaderMutation,
                             PageMutation,
                             NotificationMutation,
+                            AuthMutation,
                         ),
 };
 
