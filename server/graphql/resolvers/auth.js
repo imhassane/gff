@@ -11,7 +11,7 @@ const authenticate = async (parent, data, context) => {
 
         let token = jwt.sign({ _id: user._id }, 'secret');
 
-        return { token };
+        return { token, permission: user.permissions[0] };
 
     } catch(ex) {
         throw ex;

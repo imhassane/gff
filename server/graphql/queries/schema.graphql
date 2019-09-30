@@ -30,6 +30,7 @@ type Query {
     category(_id: ID!): Category!
 
     users: [User!]
+    me: User!
     user(_id: ID!): User!
 
     pictures(type: String!): [Picture]!
@@ -59,7 +60,8 @@ type Query {
 
 type Mutation {
     createUser(username: String!, email: String!, password: String!): User
-    updateUser(_id: ID!, picture: String!, password: String, is_active: Boolean, permissions:[String!]): User
+    updateUser(_id: ID!, picture: String!, is_active: Boolean, permissions:[String!]): User
+    updatePassword(oldPassword: String!, password: String!): User!
     deleteUser(_id: ID!): User
 
     authenticate(email: String!, password: String!): Auth!
@@ -74,6 +76,7 @@ type Mutation {
 
     createPicture(type: String!, path: String!): Picture
     updatePicture(_id: ID!, path: String!): Picture
+    updateUserPicture(_id: ID!): User
     deletePicture(_id: ID!): Picture
 
     createPost(title: String!, content: String!, extract: String!, tags: [String!], categories: [String!], active: Boolean, draft: Boolean, picture: ID!): Post

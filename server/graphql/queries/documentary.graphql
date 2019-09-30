@@ -12,6 +12,7 @@ type Documentary {
     author: User!
     url: String!
     picture: Picture!
+    views: Int!
     createdAt: DateTime!
     updatedAt: DateTime!
 }

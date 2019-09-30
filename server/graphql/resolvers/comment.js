@@ -48,7 +48,7 @@ const createComment = async (parent, data, context) => {
         if(errors) throw new Error(errors.details[0].message);
 
         let post = null, comment = null;
-        if(data.post) post = await Post.findById(data.post);
+        if(data.post) post = await Post.findById(data.post).populate('author');
 
         if(data.comment) comment = await Post.findById(data.comment);
 
@@ -77,6 +77,11 @@ const createComment = async (parent, data, context) => {
         } else {
             message = `${_comment.username} a commenté l'article "${post.title}"`;
             _notif = await createNotification(parent, { post, message, title: message, type: "COMMENT" }, context);
+        }
+
+        if(!context.user && post) {
+            post.author.comment_counter += 1;
+            await post.author.save();
         }
 
         return _comment;

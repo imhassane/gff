@@ -1,5 +1,5 @@
 const { User, validateUser } = require('../../models/user');
-const { USERNAME_EXIST, EMAIL_EXIST, USER_DOESNT_EXIST } = require('../errors');
+const { USERNAME_EXIST, EMAIL_EXIST, USER_DOESNT_EXIST, INVALID_PERMISSION } = require('../errors');
 
 const users = async () => {
     try {
@@ -12,9 +12,11 @@ const users = async () => {
 
 const user = async (parent, data, context) => {
     try {
-        const _user = await User.findOne(data).populate('posts');
+        let _user = await User.findOne(data).populate('posts');
         if(!_user) throw new Error(USER_DOESNT_EXIST)
-
+        // Mise à jour du profil.
+        _user.views += 1;
+        _user = await _user.save();
         return _user;
     } catch(ex) {
         throw ex;
@@ -63,7 +65,23 @@ const deleteUser = async (parent, data, context) => {
     }
 }
 
+const me = async (parent, data, context) => {
+    if(!context.user) throw new Error(INVALID_PERMISSION)
+    return context.user;
+}
+
+const updatePassword = async (parent, data, context) => {
+    if(!context.user) throw new Error(INVALID_PERMISSION);
+    try {
+        if(!context.user.comparePasswords(data.oldPassword)) throw new Error("Le mot de passe est incorrect");
+        
+        context.user.password = data.password;
+        await context.user.save();
+        return context.user;
+    } catch(ex) { throw ex; }
+}
+
 module.exports = {
-    UserQuery: { users, user },
-    UserMutation: { createUser, updateUser, deleteUser }
+    UserQuery: { users, user, me },
+    UserMutation: { createUser, updateUser, deleteUser, updatePassword }
 }

@@ -31,15 +31,26 @@ const getPosts = async (parent, data, context) => {
 
 const post = async (parent, data, context) => {
     try {
-        const _post = await Post.findOne(data)
-                                .populate('author')
+        let _post = await Post.findOne(data)
                                 .populate('tags')
                                 .populate('categories')
                                 .populate('picture')
                                 .populate('comments');
+        let author = await User.findOne({ _id: _post.author }).populate('picture');
+        _post.author = author;
+
         // Test de l'existance du Post.
         if(!_post) throw new Error(POST_DOESNT_EXIST);
         
+        // Si le lecteur n'est pas un membre de l'équipe, on incrémente les vues.
+        if(!context.user) {
+            _post.views += 1;
+            _post = await _post.save();
+            
+            _post.author.post_view_counter += 1;
+            await _post.author.save();
+        }
+
         return _post;
     } catch(ex) {
         throw ex;

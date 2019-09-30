@@ -6,7 +6,14 @@ const { DOCUMENTARY_EXIST, USER_DOESNT_EXIST, RESSOURCE_DOESNT_EXIST } = require
 
 const documentary = async (parent, data, context) => {
     try {
-        const _documentary = await Documentary.findOne(data).populate('author').populate('picture');
+        let _documentary = await Documentary.findOne(data).populate('author').populate('picture');
+        if(!context.user) {
+            _documentary.views += 1;
+            _documentary = await _documentary.save();
+
+            _documentary.author.post_view_counter += 1;
+            await _documentary.author.save();
+        }
         return _documentary;
     } catch(ex) {
         throw ex;

@@ -11,16 +11,20 @@ const UserSchema = new mongoose.Schema({
     is_active: { type: Boolean, default: false },
     posts: [
         { type: mongoose.Schema.Types.ObjectId, ref: "Post", default: [] }
-    ]
+    ],
+    views: { type: Number, default: 0 },
+    post_view_counter: { type: Number, default: 0 },
+    comment_counter: { type: Number, default: 0 },
+    
 }, { timestamps: true });
 
 UserSchema.pre('save', function() {
+    if(this.isModified('password')) this.password = bcrypt.hashSync(this.password, 10);
     this.username = this.username.toLowerCase();
-    this.password = bcrypt.hashSync(this.password, 10);
 });
 
 UserSchema.methods.comparePasswords = function(other) {
-    return bcrypt.compareSync(other, this.password);
+    return bcrypt.compareSync(other, this.password,);
 }
 
 const User = mongoose.model('User', UserSchema);

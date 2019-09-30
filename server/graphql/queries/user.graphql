@@ -10,8 +10,11 @@ type User {
     email: String!
     is_active: Boolean
     permissions: [UserPermissions]!
-    picture: Picture!
+    picture: Picture
     posts: [Post!]
+    views: Int!
+    post_view_counter: Int!
+    comment_counter: Int!
     createdAt: DateTime!
     updatedAt: DateTime!
 }

@@ -14,6 +14,7 @@ const PostSchema = new mongoose.Schema({
     categories: [{ type: mongoose.Schema.Types.ObjectId, ref:"Category", required: true }],
     comments: [ { type: mongoose.Schema.Types.ObjectId, ref: "Comment" } ],
     picture: { type: mongoose.Schema.Types.ObjectId, ref: "Picture" },
+    views: { type: Number, default: 0 }
 }, { timestamps: true });
 
 PostSchema.pre('save', function() {

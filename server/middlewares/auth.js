@@ -4,12 +4,13 @@ const { User } = require('../models/user');
 
 const getUserFromToken = async (token) => {
     try {
-        if(token) {
-            let decoded = jwt.verify(token, 'secret');
-            const user = await User.findOne({ _id: decoded._id });
-            if(user) return user;
-        }
-        return null;
+        let decoded = jwt.verify(token, 'secret');
+        const user = await User.findOne({ _id: decoded._id })
+                                .populate('posts')
+                                .populate('picture');
+        if(user) return user;
+        
+        return {};
     } catch(ex) {
         throw ex;
     }

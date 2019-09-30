@@ -9,6 +9,7 @@ const DocumentarySchema = new mongoose.Schema({
     author: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
     url: { type: String, required: true },
     picture: { type: mongoose.Schema.Types.ObjectId, ref: "Picture" },
+    views: { type: Number, default: 0 },
 }, { timestamps: true });
 
 const Documentary = mongoose.model('Documentary', DocumentarySchema);

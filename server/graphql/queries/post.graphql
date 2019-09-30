@@ -11,6 +11,7 @@ type Post {
     draft: Boolean!
     categories: [Category!]
     picture: Picture
+    views: Int!
     comments: [Comment!]
     createdAt: DateTime!
     updatedAt: DateTime!

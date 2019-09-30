@@ -16,9 +16,13 @@ const logger = require('./startup/logger');
 // Contexte de l'application.
 const context = async ({ req }) => {
     try {
+        let _context = {};
         const token = req.headers.authtoken;
-        const user = await getUserFromToken(token);
-        return { user };
+        if(token) {
+            const user = await getUserFromToken(token);
+            _context = { ..._context, user };
+        }
+        return _context;
     } catch(ex) {
         throw ex;
     }
