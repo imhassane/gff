@@ -28,9 +28,10 @@ class Login extends React.Component {
             const variables = { email, password };
 
             const { data: { authenticate } } = await client.mutate({ mutation: AUTHENTICATE, variables});
-            const { token } = authenticate;
+            const { token, permission } = authenticate;
             // On enregistre le token dans les cookies.
             localStorage.setItem('x-auth-token', token);
+            localStorage.setItem('x-auth-permission', permission);
             this.setState({ success: "Vous allez être redirigé vers la page d'administration", errors: {} });
             setTimeout(() => this.props.history.push(routes.DEFAULT_ROUTE), 1000);
             
@@ -66,7 +67,7 @@ class Login extends React.Component {
 const AUTHENTICATE = gql`
     mutation Authenticate($email: String!, $password: String!) {
         authenticate(email: $email, password: $password) {
-            token
+            token, permission
         }
     }
 `;

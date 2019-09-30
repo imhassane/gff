@@ -7,7 +7,7 @@ const WithDashboardNavigation = (Children) => {
     class HOC extends React.Component {
         constructor(props) {
             super(props);
-            this.state = { search: '' };
+            this.state = { search: '', USER_PERMISSION: localStorage.getItem('x-auth-permission') };
             
             const token = localStorage.getItem('x-auth-token');
             if(!token) props.history.push(routes.LOGIN);
@@ -15,7 +15,7 @@ const WithDashboardNavigation = (Children) => {
         handleSearchChange = (search) => this.setState({ search })
 
         render() {
-            const { search } = this.state;
+            const { search, USER_PERMISSION } = this.state;
             return (
                 <div className="uk-grid-small" uk-grid="true">
                     <div className="uk-width-1-5@m">
@@ -28,12 +28,18 @@ const WithDashboardNavigation = (Children) => {
                                     <input type="search" placeholder="Entrez votre recherche" onChange={ ({ target: { value }}) => this.handleSearchChange(value) } className="uk-input uk-form-blank" />
                                 </div>
                                 <div className="uk-width-2-5@m">
-                                    <Link className="uk-button uk-button-default" to={routes.CREATE_POST}>Ecrire un article</Link>
+                                    <Link className="uk-button uk-button-secondary uk-margin-right" to={routes.CREATE_POST}>Ecrire un article</Link>
+                                    <button onClick={_ => {
+                                        localStorage.removeItem('x-auth-token');
+                                        localStorage.removeItem('x-auth-permission');
+                                        setTimeout(() => this.props.history.push(routes.LOGIN), 1000);
+                                    }} className="uk-button uk-button-danger">Déconnexion</button>
                                 </div>
                             </div>
+                            <p className="uk-link" onClick={ _ => this.props.history.goBack() }>Retour</p>
                         </div>
                         <div className="uk-padding">
-                            <Children {...this.props} search={search} />
+                            <Children {...this.props} USER_PERMISSION={USER_PERMISSION} search={search} />
                         </div>
                     </div>
                 </div>

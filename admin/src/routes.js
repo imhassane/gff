@@ -2,6 +2,9 @@ export default {
     DEFAULT_ROUTE: "/posts/list",
     LOGIN: "/login",
     REGISTER: "/register/",
+    ME: "/me",
+    CHANGE_PICTURE: "/me/update-picture/",
+    CHANGE_PASSWORD: "/me/update-password",
 
     HOME: "/dashboard/",
 
@@ -23,6 +26,7 @@ export default {
     TAGS: "/tags/list/",
     
     USERS: "/users/list/",
+    USER: "/users/manage/",
 
     COMMENTS: "/comments/list",
 

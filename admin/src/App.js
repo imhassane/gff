@@ -13,7 +13,7 @@ import Login from './containers/login';
 import Register from './containers/register';
 import { Home } from "./components/home";
 import { CommentsList } from './containers/comment';
-import { UserList } from './containers/user';
+import { UserList, UserProfile, ChangePassword, ManageUser } from './containers/user';
 import { CreateCategory, CategoryList } from './containers/category';
 import { CreatePost, PostList, UpdatePost } from "./containers/post";
 import { TagList, CreateTag } from "./containers/tag";
@@ -23,6 +23,7 @@ import { ReaderList } from './containers/reader';
 import { FeedbackList } from './containers/feedback';
 import { PageList, CreatePage, PageDetail, PageUpdate, PageDelete } from './containers/page';
 import { NotificationList } from './containers/notification';
+import { UserPictureUpdate } from './containers/upload';
 
 function Main() {
   return (
@@ -30,6 +31,11 @@ function Main() {
           <Route exact path="/" component={Home} />
           <Route exact path={ROUTES.LOGIN} component={Login} />
           <Route exact path={ROUTES.REGISTER} component={Register} />
+
+          <Route exact path={ROUTES.ME} component={ WithDashboard(UserProfile) } />
+          <Route exact path={ROUTES.CHANGE_PICTURE} component={ WithDashboard(UserPictureUpdate) } />
+          <Route exact path={ROUTES.CHANGE_PASSWORD} component={ WithDashboard(ChangePassword) } />
+          <Route exact path={`${ROUTES.USER}:_id`} component={ WithDashboard(ManageUser) } />
 
           <Route exact path={ROUTES.COMMENTS} component={ WithDashboard(CommentsList) } />
 

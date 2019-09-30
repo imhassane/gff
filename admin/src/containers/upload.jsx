@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import S3 from "react-s3";
 import S3Config from "../config/aws";
 
@@ -6,6 +6,9 @@ import client from "../config/apollo";
 import gql  from "graphql-tag";
 
 import { PostFileUploadForm, PostFileUploadResume } from "../components/upload";
+import { Title } from "../components/utility";
+import routes from "../routes";
+import { Messages } from "../components/messages";
 
 export class PostFileUpload extends React.Component {
     constructor(props) {
@@ -61,11 +64,42 @@ export class PostUploaded extends React.Component {
     }
 }
 
+export const UserPictureUpdate = props => {
+    const [picture, setPicture] = useState(null);
+    const [messages, setMessages] = useState({});
+
+    const handlePictureChange = async (pictures) => {
+        setPicture(pictures[0]._id);
+        try {
+            if(picture) {
+                await client.mutate({ mutation: UPDATE_PICTURE, variables: { _id: pictures[0]._id }});
+                setMessages({ success: "Votre image de profil a bien été changée" });
+                setTimeout(() => props.history.push(routes.ME), 1000);
+            }
+        } catch({ message }) { setMessages({ error: message }); }
+    };
+    return (
+        <>
+            <Title message="Mise à jour de l'image de profil" />
+            <Messages error={messages.error} success={messages.success} />
+            <PostFileUpload onPictureUpload={handlePictureChange} />
+        </>
+    );
+}
+
 const CREATE_PICTURE = gql`
     mutation CreatePicture($path: String!){
         createPicture(type: "POST", path: $path) {
             _id
             path
+        }
+    }
+`;
+
+const UPDATE_PICTURE = gql`
+    mutation UpdatePicture($_id: ID!) {
+        updateUserPicture(_id: $_id) {
+            username
         }
     }
 `;

@@ -11,7 +11,7 @@ const DashboardNavigation = _ => (
                 <li className="uk-nav-header">Moi</li>
                 
                 <li>
-                    <Link to="">Mon compte</Link>
+                    <Link to={ROUTES.ME}>Mon compte</Link>
                 </li>
 
                 <li>

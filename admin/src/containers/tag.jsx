@@ -3,6 +3,7 @@ import client from "../config/apollo";
 import { TagFinderForm, TagResume, TagForm } from "../components/tag";
 import gql from "graphql-tag";
 import { Success, Error } from "../components/messages";
+import { Title } from "../components/utility";
 
 export class TagFinder extends React.Component {
     constructor(props) {
@@ -135,7 +136,7 @@ export class TagList extends React.Component {
     render() {
         return (
             <div>
-                <h1>Liste des tags</h1>
+                <Title message="Gestion des tags" />
                 <p className="uk-text-meta">{ this.state.tags.length } au total</p>
                 <div className="uk-grid-small uk-child-width-1-2@m" uk-grid="true">
                     <div>{ this.renderTags() }</div>
@@ -177,7 +178,7 @@ export class CreateTag extends React.Component {
     render() {
         return (
             <div>
-                <h1>Nouveau tag</h1>
+                <Title message="Nouveau tag" />
                 { this.renderForm() }
             </div>
         )
