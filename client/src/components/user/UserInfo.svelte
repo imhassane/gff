@@ -13,7 +13,7 @@
     </ul>
     <div class="uk-text-center">
        <p>
-            <img class="uk-border-pill" width="200" height="200" src="https://st4.depositphotos.com/1028735/22757/v/1600/depositphotos_227577174-stock-illustration-animation-portrait-beautiful-african-woman.jpg" alt="">
+            <img class="uk-border-pill" width="200" height="200" src="{data.picture.path}" alt="{data.username}">
        </p> 
        <p>
             <strong>@{data.username}</strong>

@@ -40,6 +40,7 @@
 			<Route exact path="/posts/read/:_id" component={Post} />
 			<Route exact path="/documentaries/type/:type" component={Documentaries} />
 			<Route exact path="/documentaries/watch/:_id" component={Documentary} />
+			<!-- Affichage de la page de catégories -->
 			<Route exact path="/search" component={Search} />
 		</Router>
 		<Footer />

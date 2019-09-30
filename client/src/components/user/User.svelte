@@ -12,6 +12,7 @@
             user(_id: $_id) {
                 username
                 createdAt
+                picture { path }
                 posts {
                     _id
                     title

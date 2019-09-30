@@ -1,4 +1,4 @@
-<a class="uk-margin uk-button" href={`#/category/${data._id}`}>{data.name}</a>
+<a class="uk-margin uk-button uk-button-text" href={`/categories/detail/${data._id}`}>{data.name}</a>
 
 <script>
     export let data;

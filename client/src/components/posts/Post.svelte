@@ -61,8 +61,7 @@
                 _id
                 title
                 content
-                author { _id, username, posts { _id } }
-                picture { path }
+                author { _id, username, posts { _id }, picture { path } }
                 comments { _id, username, content, createdAt }
                 tags { _id, name }
                 categories { _id, name }

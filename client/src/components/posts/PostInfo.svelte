@@ -1,7 +1,7 @@
 <div>
 
-    <div class="">
-        <img width="150" src="{picture}" alt="" class="uk-border-pill" />
+    <div class="uk-margin">
+        <img width="150" height="150" src="{author.picture.path}" alt="{author.username}" />
     </div>
 
     <div>
@@ -31,5 +31,5 @@
     import Tag from "../general/Tag.svelte";
     import { getFormattedDate } from "../../helpers.js";
     export let categories=null, tags=null;
-    export let author={}, createdAt="", posts = [],picture="https://st4.depositphotos.com/1028735/22757/v/1600/depositphotos_227577174-stock-illustration-animation-portrait-beautiful-african-woman.jpg";
+    export let author={}, createdAt="", posts = [];
 </script>
