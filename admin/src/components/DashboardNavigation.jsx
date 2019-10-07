@@ -32,6 +32,10 @@ const DashboardNavigation = _ => (
                     <Link to={ROUTES.PAGES}>Gestion des pages</Link>
                 </li>
 
+                <li>
+                    <Link to={ROUTES.MANAGE_MENU}>Gestion du menu</Link>
+                </li>
+
                 <li className="uk-nav-header">Commentaires</li>
 
                 <li>

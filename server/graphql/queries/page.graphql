@@ -6,6 +6,7 @@ type Page {
     _id: ID!
     title: String!
     slug: String!
+    rank: Int!
     type: PAGE_TYPE!
     description: String!
     content: String

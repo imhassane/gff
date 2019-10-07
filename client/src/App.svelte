@@ -12,6 +12,7 @@
 	import Footer from "./components/Footer.svelte";
 	import Documentary from "./components/documentaries/Documentary.svelte";
 	import Documentaries from "./components/documentaries/Documentaries.svelte";
+	import Page from "./components/pages/Page.svelte";
 	import Search from "./components/search/Search.svelte";
 
 	const client = new ApolloClient({ uri: 'http://localhost:4000/graphql '});
@@ -40,6 +41,8 @@
 			<Route exact path="/posts/read/:_id" component={Post} />
 			<Route exact path="/documentaries/type/:type" component={Documentaries} />
 			<Route exact path="/documentaries/watch/:_id" component={Documentary} />
+			<Route exact path="/page/:rank/:slug" component={Page} />
+
 			<!-- Affichage de la page de catégories -->
 			<Route exact path="/search" component={Search} />
 		</Router>

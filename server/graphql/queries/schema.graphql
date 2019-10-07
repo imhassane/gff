@@ -21,7 +21,7 @@ type Query {
     post(_id: ID!): Post!
 
     pages: [Page!]
-    page(_id: ID!): Page!
+    page(_id: ID, rank: Int): Page!
 
     tags: [Tag!]
     tag(_id: ID!): Tag!
@@ -84,7 +84,7 @@ type Mutation {
     deletePost(_id: ID!): Post
 
     createPage(title: String!, description: String!, type: String!, content: String): Page!
-    updatePage(_id: ID!, title: String, description: String, content: String): Page!
+    updatePage(_id: ID!, title: String, description: String, content: String, rank: Int): Page!
     deletePage(_id: ID!): Page!
 
     createDocumentary(title: String!, description: String!, content: String!, url: String!, TYPE: String!, picture: ID!): Documentary

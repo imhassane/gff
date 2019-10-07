@@ -9,15 +9,15 @@
     <ul class="uk-navbar-nav">
     
         <li><Link href="/">Accueil</Link></li>
-        <li><Link href="/">Présentation</Link></li>
-        <li><Link href="/">Nos activités</Link></li>
+        <li><Link href="/page/1/presentation">Présentation</Link></li>
+        <li><Link href="/page/2/activites">Nos activités</Link></li>
         <li>
-          <Link href="/rights">Droits</Link>
+          <Link href="/page/3/droits">Droits</Link>
           <div class="uk-navbar-dropdown">
             <ul class="uk-nav uk-navbar-dropdown-nav">
-              <li><Link href="/rights/men-rights">Droits de l'Homme</Link></li>
-              <li><Link href="/rights/women-rights">Droits de la femme</Link></li>
-              <li><Link href="/rights/children-rights">Droits des enfants</Link></li>
+              <li><Link href="/page/4/droits/droits-de-l-homme">Droits de l'Homme</Link></li>
+              <li><Link href="/page/5/droits/droits-de-la-femme">Droits de la femme</Link></li>
+              <li><Link href="/page/6/droits/droits-des-enfants">Droits des enfants</Link></li>
             </ul>
           </div>
         </li>
@@ -31,7 +31,7 @@
             </ul>
           </div>
         </li>
-        <li><Link href="/">Apprendre à s'engager</Link></li>
+        <li><Link href="/page/7/apprendre-a-s-engager">Apprendre à s'engager</Link></li>
 
     </ul>
 

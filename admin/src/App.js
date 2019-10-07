@@ -24,6 +24,7 @@ import { FeedbackList } from './containers/feedback';
 import { PageList, CreatePage, PageDetail, PageUpdate, PageDelete } from './containers/page';
 import { NotificationList } from './containers/notification';
 import { UserPictureUpdate } from './containers/upload';
+import { MenuPage } from './containers/menu';
 
 function Main() {
   return (
@@ -40,6 +41,7 @@ function Main() {
           <Route exact path={ROUTES.COMMENTS} component={ WithDashboard(CommentsList) } />
 
           <Route exact path={ROUTES.PAGES} component={ WithDashboard(PageList) } />
+          <Route exact path={ROUTES.MANAGE_MENU} component={ WithDashboard(MenuPage) } />
           <Route exact path={ROUTES.CREATE_PAGE} component={ WithDashboard(CreatePage) } />
           <Route exact path={`${ROUTES.PAGE_DETAIL}:_id`} component={ WithDashboard(PageDetail) } />
           <Route exact path={`${ROUTES.PAGE_UPDATE}:_id`} component={ WithDashboard(PageUpdate) } />

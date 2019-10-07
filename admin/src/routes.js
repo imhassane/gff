@@ -9,6 +9,7 @@ export default {
     HOME: "/dashboard/",
 
     PAGES: "/pages/list",
+    MANAGE_MENU: "/menu/manage/",
     CREATE_PAGE: "/pages/create",
     PAGE_DETAIL: "/pages/detail/",
     PAGE_UPDATE: "/pages/update/",
