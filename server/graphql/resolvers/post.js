@@ -8,7 +8,7 @@ const { canWrite, canDelete, canUpdate } = require('../../helpers');
 
 const posts = async () => {
     try {
-        let _posts = await Post.find()
+        let _posts = await Post.find({ active: true })
                                 .populate('author')
                                 .populate('comments')
                                 .populate('picture')
@@ -20,6 +20,22 @@ const posts = async () => {
         throw ex;
     }
 };
+
+const draft = async (parent, data, context) => {
+    if(!context.user) throw new Error(INVALID_PERMISSION);
+    try {
+        const _posts = await Post.find({ active: false })
+                                .populate('author')
+                                .populate('comments')
+                                .populate('picture')
+                                .populate('tags')
+                                .populate('categories')
+                                .sort('-createdAt');
+        return _posts;
+    } catch(ex) {
+        throw ex;
+    }
+}
 
 const getPosts = async (parent, data, context) => {
     try {
@@ -130,6 +146,16 @@ const updatePost = async (parent, data, context) => {
     }
 };
 
+const moveToDraft = async (parent, data, context) => {
+    if(!canDelete(context.user)) throw new Error(INVALID_PERMISSION);
+    try {
+        let _post = await Post.findOneAndUpdate(data, { $set: { active: false }}, { new: true });
+        return _post;
+    } catch(ex) {
+        throw ex;
+    }
+};
+
 const deletePost = async (parent, data, context) => {
     if(!canDelete(context.user)) throw new Error(INVALID_PERMISSION);
     try {
@@ -141,6 +167,6 @@ const deletePost = async (parent, data, context) => {
 }
 
 module.exports = {
-    PostQuery: { posts, getPosts, post },
-    PostMutation: { createPost, updatePost, deletePost }
+    PostQuery: { posts, getPosts, post, draft },
+    PostMutation: { createPost, updatePost, deletePost, moveToDraft }
 }
