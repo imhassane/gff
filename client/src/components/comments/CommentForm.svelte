@@ -1,3 +1,4 @@
+{#if error}<Error message={error} />{/if}
 <form id="comment-form">
 
     <div class="uk-margin">
@@ -28,9 +29,9 @@
     import { getClient, mutate } from "svelte-apollo";
     import { gql } from "apollo-boost";
 
-    let username = "imthassane", email = "imthassane@gmail.com", content = "Cet article il est impressionnant, bravo", comment = "";
+    let username = "", email = "", content = "", comment = "";
     let errorUsername = "", errorEmail = "", errorContent = "";
-    let valid = false, success = false;
+    let valid = false, success = false, error = null;
 
     export let post = "";
 
@@ -43,7 +44,7 @@
         }
     `;
 
-    function validate(event) {
+    async function validate(event) {
         if(username.length < 3) errorUsername = "Votre nom d'utilisateur est trop petit: au moins 3 caractères";
         else errorUsername = "";
 
@@ -56,11 +57,21 @@
         if(!errorUsername.length && !errorEmail.length && !errorContent.length) valid = true
         else valid = false;
 
-        if(valid) addComment();
+        if(valid) {
+            try {
+                await addComment();
+            } catch(ex) { error = ex.message }
+        }
     }
 
     async function addComment() {
-        let _comment = await mutate(client, { mutation: ADD_COMMENT, variables: { username, email, content, post, comment } });
-        if(_comment.data.createComment) success = true;
+        try {
+            let _comment = await mutate(client, { mutation: ADD_COMMENT, variables: { username, email, content, post, comment } });
+            success = true;
+            error = null;
+            setTimeout(() => window.location.reload(true), 1000);
+        } catch({ message }) {
+            error = message;
+        }
     }
 </script>

@@ -4,6 +4,7 @@
 
     import Loader from "../general/Loader.svelte";
     import Error from "../messages/Error.svelte";
+    import EmptyPage from "../general/EmptyPage.svelte";
 
     export let router = {};
 
@@ -25,6 +26,9 @@
 {#await $documentaries}
     <Loader />
     {:then response}
+        {#if response.data.documentaries.length === 0}
+            <EmptyPage message="Aucun documentaire pour le moment" />
+        {/if}
         {#each response.data.documentaries as doc}
             <div>
                 <h1>{doc.title}</h1>

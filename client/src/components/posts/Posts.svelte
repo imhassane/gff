@@ -9,6 +9,9 @@
         {#await $posts}
             <Loader />
             {:then response}
+                {#if response.data.posts.length === 0}
+                    <EmptyPage message="Aucune actualité publiée pour le moment" />
+                {/if}
                 {#each response.data.posts as post}
                     <PostResume data={post} />
                 {/each}
@@ -27,6 +30,7 @@
     import Error from "../messages/Error.svelte";
     import MainContainer from "../general/MainContainer.svelte";
     import PostResume from "./PostResume.svelte";
+    import EmptyPage from "../general/EmptyPage.svelte";
 
     import Loader from "../general/Loader.svelte";
 

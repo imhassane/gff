@@ -2,7 +2,7 @@
 
     <h3 class="uk-margin uk-text-bold">Quelques reflexions sur cet article</h3>
 
-    {#if comments.length === 0}<Loader />{/if}
+    {#if comments.length === 0}<p>Aucun commentaire pour le moment</p>{/if}
 
     {#each comments as comment}
         <div>

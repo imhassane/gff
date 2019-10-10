@@ -1,4 +1,4 @@
-<span class="uk-padding">
+<span class="">
     <a class="uk-label" href={`#/tag/${data._id}`}>{data.name}</a>
 </span>
 

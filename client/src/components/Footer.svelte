@@ -1,9 +1,9 @@
 
-<footer class="page-footer">
+<footer class="uk-margin-top">
     <hr>
     <div class="uk-container">
-        <div class="uk-flex uk-flex-around">
-            <div>
+        <div class="uk-flex uk-flex-around@m uk-flex-left@s">
+            <div class="uk-visible@s">
                 <div class="uk-cover-container">
                     <img src="{logo}" alt="" uk-cover>
                     <canvas height="200"></canvas>
@@ -14,14 +14,14 @@
                 <Title begin="Plus" end="D'informations" />
                 <ul class="uk-nav">
                     <li><a class="grey-text text-lighten-3" href="/contact">Contact</a></li>
-                    <li><a class="grey-text text-lighten-3" href="#">Nous suivre</a></li>
+                    <li><a class="grey-text text-lighten-3" href="#/">Nous suivre</a></li>
                 </ul>
             </div>
         </div>
     </div>
     <div class="footer-copyright">
-        <div class="container">
-            © 2019 Copyright Text
+        <div class="container" style="text-align:center;">
+            © 2019
             <a class="grey-text text-lighten-4 right" href="#!">Créé par T. Hassane SOW</a>
         </div>
     </div>

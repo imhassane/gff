@@ -1,6 +1,6 @@
 <article class="uk-article">
 
-    <h1 class="uk-article-title uk-text-bold"><Link class="uk-link-reset" href={`/posts/read/${data._id}`}>{ data.title }</Link></h1>
+    <h2 class="uk-article-title uk-text-bold"><Link class="uk-link-reset" href={`/posts/read/${data._id}`}>{ data.title }</Link></h2>
 
     <p class="uk-article-meta">Ecrit par <a href="#">{ data.author.username }</a> le { getFormattedDate(data.createdAt) }.</p>
 
