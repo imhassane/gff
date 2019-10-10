@@ -1,4 +1,6 @@
 const { Post, validatePost } = require('../../models/post');
+const { Category } = require('../../models/category');
+const { Tag } = require('../../models/tag');
 const { User } = require('../../models/user');
 const { Picture } = require('../../models/picture');
 const { POST_DOESNT_EXIST, INVALID_PERMISSION } = require('../errors');
@@ -66,6 +68,38 @@ const createPost = async (parent, data, context) => {
         let _post = new Post(data);
         _post.author = context.user;
         await _post.save();
+
+        if(data.tags) {
+            let t = data.tags.map(t => new Promise(async (resolve, reject) => {
+                try {
+                    const _t = await Tag.findOne({ _id: t });
+                    _t.posts.push(_post);
+                    await _t.save();
+
+                    resolve(_t);
+                } catch(ex) {
+                    reject(ex);
+                }
+            }));
+
+            Promise.all(t).then(tags => _post.tags = tags).catch(ex =>{ throw ex; })
+        }
+
+        if(data.categories) {
+            let c = data.categories.map(c => new Promise(async (resolve, reject) => {
+                try {
+                    const _c = await Category.findOne({ _id: c });
+                    _c.posts.push(_post);
+                    await _c.save();
+
+                    resolve(_c);
+                } catch(ex) {
+                    reject(ex);
+                }
+            }));
+            
+            Promise.all(c).then(categories => _post.categories = categories).catch(ex => { throw ex; })
+        }
 
         context.user.posts.push(_post);
         await context.user.save();

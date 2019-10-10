@@ -21,7 +21,6 @@ const getNotification = async (data) => {
 
 const notification = async (parent, data, context) => {
     try {
-        console.log("Hello")
         const _n = await getNotification(data);
         if(!_n) throw new Error(RESSOURCE_DOESNT_EXIST);
         return _n;
@@ -32,7 +31,6 @@ const notification = async (parent, data, context) => {
 
 const __createNotification = async (data) => {
     try {
-        console.log("Create")
         const { errors } = validateNotification(data);
         if(errors) throw new Error(errors.details[0].message);
 
@@ -58,10 +56,10 @@ const createNotification = async (parent, data, context) => {
 
 const updateNotification = async (parent, data, context) => {
     try {
-        let _n = await getNotification({ _id: data._id });
-        if(!_n) throw new Error(RESSOURCE_DOESNT_EXIST);
+        let _n = await Notification.findOneAndUpdate({ _id: data._id }, {
+            $set: data
+        }, { new: true });
 
-        _n = _n.update(data);
         return _n;
     } catch(ex) {
         throw ex;

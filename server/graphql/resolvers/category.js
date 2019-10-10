@@ -1,4 +1,5 @@
 const { Category, validateCategory } = require('../../models/category');
+const { Post } = require('../../models/post');
 
 const categories = async () => {
     try {
@@ -11,8 +12,10 @@ const categories = async () => {
 
 const category = async (parent, data, context) => {
     try {
-        const _category = await Category.findOne(data);
-        // Test de l'existance du Category.
+        const _category = await Category.findOne(data).populate({
+            path: 'posts',
+            populate: { path: 'author' }
+        });
 
         return _category;
     } catch(ex) {
