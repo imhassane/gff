@@ -25,6 +25,10 @@ const DashboardNavigation = _ => (
                 </li>
 
                 <li>
+                    <Link to={ROUTES.TRASH}>Gestion de la corbeille</Link>
+                </li>
+
+                <li>
                     <Link to={ROUTES.DOCUMENTARIES}>Gestion des documentaires</Link>
                 </li>
 

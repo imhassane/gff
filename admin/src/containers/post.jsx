@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { EditorState, convertToRaw } from "draft-js";
 import { Editor } from 'react-draft-wysiwyg';
 import draftToHtml from 'draftjs-to-html';
@@ -9,10 +9,10 @@ import { PostFileUpload, PostUploaded } from "./upload";
 import { PostPlanning } from "../components/planning";
 import Loader from "../components/loader";
 import client from "../config/apollo";
-import { PostResume } from "../components/post";
+import { PostResume, Post } from "../components/post";
 import gql from "graphql-tag";
 import { Success, Error, Messages } from "../components/messages";
-import { Title } from "../components/utility";
+import { Title, DataCounter } from "../components/utility";
 
 const hashtagConfig = {
     separator: ' ',
@@ -138,19 +138,32 @@ export class PostList extends React.Component {
             this.setState({ errors: { ...this.state.errors, message } });
         }
     }
+    handleMoveToTrash = async (_id) => {
+        try {
+            if(window.confirm("Voulez-vous supprimer l'article ?")) {
+                const { data: { moveToDraft } } = await client.mutate({ mutation: MOVE_TO_DRAFT , variables: { _id }});
+                this.setState({ success: `L'article "${moveToDraft.title}" a été mis à la corbeille` });
+                setTimeout(() => window.location.reload(true), 1000);
+            }
+        } catch({ message }) {
+            this.setState({ errors: { ...this.state.errors, message } });
+        }
+    }
     renderPosts = () => {
         let { posts } = this.state;
         posts = posts.filter(p => p.title.toLowerCase().includes(this.props.search));
-        posts = posts.map((d, k) => <PostResume data={d} key={k} />);
+        posts = posts.map((d, k) => <PostResume onMoveToTrash={this.handleMoveToTrash} data={d} key={k} />);
         return (
             <div>{ posts }</div>
         )
     }
     render() {
-        if(!this.state.posts) return <Loader />
+        const { errors, success, posts } = this.state;
+        if(!posts) return <Loader />
         return (
             <div>
                 <Title message="Gestion des articles" />
+                <Messages error={errors.message} success={success} />
                 <div>
                     { this.renderPosts() }
                 </div>
@@ -272,9 +285,88 @@ export class UpdatePost extends React.Component {
     }
 }
 
+export const PostDetail = props => {
+    const [post, setPost] = useState(null);
+    const [messages, setMessages] = useState({});
+
+    useEffect(() => {
+        const getPost = async () => {
+            try {
+                const { data: { post } } = await client.query({ query: GET_POST, variables: { _id: props.match.params._id }});
+                setPost(post);
+            } catch({ message }) { setMessages({ error: message }); }
+        }
+        getPost();
+    });
+
+    return (
+        <>
+            <Messages error={messages.error} />
+            { !post && <Loader /> }
+            { post && <Post data={post} />    }        
+        </>
+    );
+}
+
+export const Trash = props => {
+    const [posts, setPosts] = useState([]);
+    const [messages, setMessages] = useState({});
+
+    const handleRemoveFromTrash = async (_id) => {
+        try {
+            const { data: { updatePost } } = await client.mutate({ mutation: REMOVE_FROM_TRASH, variables: { _id } });
+            setMessages({ success: `L'article "${updatePost.title}" a été déplacé de la corbeille` });
+            setTimeout(() => window.location.reload(true), 1000);
+        } catch({ message }) { setMessages({ error: message }); }
+    }
+
+    const handleDelete = async (_id) => {
+        try {
+            const { data: { deletePost } } = await client.mutate({ mutation: DELETE_POST, variables: { _id } });
+            setMessages({ success: `L'article "${deletePost.title}" a été définitivement supprimé` });
+            setTimeout(() => window.location.reload(true), 1000);
+        } catch({ message }) { setMessages({ error: message }); }
+    }
+
+    useEffect(() => {
+        const getPosts = async () => {
+            try {
+                const { data: { draft } } = await client.query({ query: DRAFT });
+                setPosts(draft);
+            } catch({ message }) { setMessages({ error: message }); }
+        }
+        getPosts();
+    });
+
+    let _posts = posts.map((d, k) => <PostResume
+                                            trash={true}
+                                            onDelete={handleDelete}
+                                            onRemoveToTrash={handleRemoveFromTrash}
+                                            data={d} key={k} />);
+
+    return (
+        <>
+            <Title message="Corbeille 🗑️" />
+            <DataCounter total={posts.length} type="article" />
+            <Messages error={messages.error} success={messages.success} />
+            { _posts }
+        </>
+    );
+}
+
 const POSTS = gql`
 {
     posts {
+        _id
+        title
+        createdAt
+    }
+}
+`;
+
+const DRAFT = gql`
+{
+    draft {
         _id
         title
         createdAt
@@ -313,6 +405,30 @@ const GET_POST = gql`
             _id, title, content,
             categories { _id, name }, tags { _id, name },
             extract, draft
+        }
+    }
+`;
+
+const MOVE_TO_DRAFT = gql`
+    mutation MoveToDraft($_id: ID!) {
+        moveToDraft(_id: $_id) {
+            title
+        }
+    }
+`;
+
+const DELETE_POST = gql`
+    mutation DeletePost($_id: ID!) {
+        deletePost(_id: $_id) {
+            title
+        }
+    }
+`;
+
+const REMOVE_FROM_TRASH = gql`
+    mutation RemoveFromTrash($_id: ID!) {
+        updatePost(_id: $_id, active: true) {
+            title
         }
     }
 `;

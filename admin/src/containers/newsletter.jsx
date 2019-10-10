@@ -114,7 +114,7 @@ export class NewsletterDetail extends React.Component {
     handleDelete = async (_id) => {
         try {
             const { data: { deleteNewsLetter } } = await client.mutate({ mutation: DELETE_NEWSLETTER, variables: { _id } });
-            this.setState({ sucess: `La newsletter "${deleteNewsLetter.title}" a été supprimée avec succès`});
+            this.setState({ success: `La newsletter "${deleteNewsLetter.title}" a été supprimée avec succès`});
         } catch({ message }) { this.setState({ errors: { ...this.state.errors, message } }); }
     }
     renderNewsletter = () => {

@@ -15,7 +15,7 @@ import { Home } from "./components/home";
 import { CommentsList } from './containers/comment';
 import { UserList, UserProfile, ChangePassword, ManageUser } from './containers/user';
 import { CreateCategory, CategoryList } from './containers/category';
-import { CreatePost, PostList, UpdatePost } from "./containers/post";
+import { CreatePost, PostList, UpdatePost, PostDetail, Trash } from "./containers/post";
 import { TagList, CreateTag } from "./containers/tag";
 import { DocumentaryList, CreateDocumentary } from './containers/documentaries';
 import { CreateNewsletter, NewsletterList, NewsletterDetail } from './containers/newsletter';
@@ -55,7 +55,9 @@ function Main() {
 
           <Route exact path={ROUTES.CREATE_POST} component={ WithDashboard(CreatePost) } />
           <Route exact path={`${ROUTES.UPDATE_POST}:_id`} component={ WithDashboard(UpdatePost) } />
+          <Route exact path={`${ROUTES.READ_POST}:_id`} component={ WithDashboard(PostDetail) } />
           <Route exact path={ROUTES.POSTS} component={ WithDashboard(PostList) } />
+          <Route exact path={ROUTES.TRASH} component={ WithDashboard(Trash) } />
 
           <Route exact path={ROUTES.TAGS} component={ WithDashboard(TagList) } />
           <Route exact path={ROUTES.CREATE_TAG} component={ WithDashboard(CreateTag) } />

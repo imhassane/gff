@@ -18,7 +18,8 @@ export default {
     POSTS: "/posts/list",
     CREATE_POST: "/posts/create/",
     UPDATE_POST: "/posts/update/",
-    DRAFT: "/posts/draft",
+    READ_POST: "/posts/read/",
+    TRASH: "/posts/trash/",
 
     CREATE_CATEGORY: "/categories/create/",
     CATEGORIES: "/categories/list/",
