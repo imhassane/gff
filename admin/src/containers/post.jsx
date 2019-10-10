@@ -11,7 +11,7 @@ import Loader from "../components/loader";
 import client from "../config/apollo";
 import { PostResume } from "../components/post";
 import gql from "graphql-tag";
-import { Success, Error } from "../components/messages";
+import { Success, Error, Messages } from "../components/messages";
 import { Title } from "../components/utility";
 
 const hashtagConfig = {
@@ -56,12 +56,15 @@ export class CreatePost extends React.Component {
             let rawContent = convertToRaw(editorState.getCurrentContent(), hashtagConfig);
             let content = draftToHtml(rawContent);
             
-            const picture = pictures[pictures.length - 1]._id;
+            let picture;
+            if(pictures.length === 0) this.setState({ errors: { ...this.state.errors, message: "Vous devez choisir au moins une image "}});
+            else picture = pictures[pictures.length - 1]._id;
             let variables = { title, content, tags, categories, pictures, draft, extract, picture };
 
-            let { data: { _id } } = await client.mutate({ mutation: CREATE_POST, variables });
-            if(_id) this.setState({ success: `L'article ${title} a été publié avec succès`, errors: {} });
-
+            if(!this.state.errors.message || !this.state.errors.message.length) {
+                await client.mutate({ mutation: CREATE_POST, variables });
+                this.setState({ success: `L'article "${title}" a été publié avec succès`, errors: {} });
+            }
         } catch({ message }) {
             this.setState({ errors: { ...this.state.errors, message }, success: null });
         }
@@ -112,8 +115,8 @@ export class CreatePost extends React.Component {
         const { success, errors } = this.state;
         return (
             <>
-                { success && <Success message={success} /> }
-                { errors.message && <Error message={errors.message} />}
+                <Title message="Nouvel article" />
+                <Messages success={success} error={errors.message} />
                 <>
                     { this.renderEditor() }
                 </>

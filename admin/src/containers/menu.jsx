@@ -27,6 +27,8 @@ export const MenuPage = props => {
         try {
             let variables = { _id };
             variables.rank = parseInt(prompt("Entrez le nouveau rang de la page"));
+            if(!variables.rank) variables.rank = 0;
+            
             const { data: { updatePage } } = await client.mutate({ mutation: UPDATE_RANK, variables });
             setMessages({ success: `Le rang de la page ${updatePage.title} a été mis à jour`});
             setTimeout(() => document.location.reload(true) , 300);

@@ -36,7 +36,10 @@ const WithDashboardNavigation = (Children) => {
                                     }} className="uk-button uk-button-danger">Déconnexion</button>
                                 </div>
                             </div>
-                            <p className="uk-link" onClick={ _ => this.props.history.goBack() }>Retour</p>
+                            <ul className="uk-breadcrumb">
+                                <li><span className="uk-link" onClick={ _ => this.props.history.goBack() }>Retour</span></li>
+                                <li><span className="uk-link" onClick={ _ => window.location.reload(true) }>Mettre à jour la page</span></li>
+                            </ul>
                         </div>
                         <div className="uk-padding">
                             <Children {...this.props} USER_PERMISSION={USER_PERMISSION} search={search} />

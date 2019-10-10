@@ -25,6 +25,7 @@ import { PageList, CreatePage, PageDetail, PageUpdate, PageDelete } from './cont
 import { NotificationList } from './containers/notification';
 import { UserPictureUpdate } from './containers/upload';
 import { MenuPage } from './containers/menu';
+import { Files } from './containers/file';
 
 function Main() {
   return (
@@ -71,6 +72,7 @@ function Main() {
           <Route exact path={ROUTES.LIST_NOTIFICATION} component={ WithDashboard(NotificationList) } />
           <Route exact path={`${ROUTES.DETAIL_NOTIFICATION}:_id`} component={ WithDashboard(NotificationList) } />
 
+          <Route exact path={ROUTES.LIST_FILE} component={WithDashboard(Files) } />
 
         </Switch>
   );

@@ -46,4 +46,6 @@ export default {
     DETAIL_NOTIFICATION: "/notifications/detail/",
     DELETE_NOTIFICATION: "/notifications/delete/",
     MARK_ALL_AS_READ_NOTIFICATION: "/notifications/mark-all-as-read/",
+
+    LIST_FILE: "/files/list",
 }

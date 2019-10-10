@@ -69,7 +69,7 @@ const DashboardNavigation = _ => (
                 <li className="uk-nav-header">Fichiers</li>
 
                 <li>
-                    <Link to={ROUTES.POSTS}>Gestion des fichiers</Link>
+                    <Link to={ROUTES.LIST_FILE}>Gestion des fichiers</Link>
                 </li>
 
                 <li className="uk-nav-header">Lecteurs</li>

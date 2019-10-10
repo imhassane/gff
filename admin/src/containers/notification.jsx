@@ -31,6 +31,7 @@ export const NotificationList = props => {
         try {
             await client.mutate({ mutation: NOTIFICATIONS_UPDATE , variables: { _id, seen: !seen } });
             setMessage({ success: "La notification est marquée comme lue "});
+            setTimeout(() => window.location.reload(true), 1000);
         } catch({ message }) { setMessage({ error: message }); }
     }
 
@@ -81,7 +82,7 @@ const NOTIFICATIONS_LIST = gql`
 const NOTIFICATIONS_UPDATE = gql`
     mutation UpdateNotification($_id: ID!, $seen: Boolean) {
         updateNotification(_id: $_id, seen: $seen) {
-            _id, title, type, seen, createdAt
+            seen
         }
     }
 `;
