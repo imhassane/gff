@@ -4,7 +4,7 @@
 </script>
 
 <nav class="uk-navbar-container uk-visible@m" uk-navbar>
-  <div class="uk-navbar-left">
+  <div class="nav-overlay uk-navbar-left">
 
     <ul class="uk-navbar-nav">
     
@@ -37,21 +37,46 @@
 
   </div>
 
-  <div class="uk-navbar-right">
+  <div class="nav-overlay uk-navbar-right">
 
-      <div class="uk-navbar-item">
-        <Search />
-      </div>
-
+      <a class="uk-navbar-toggle" uk-search-icon uk-toggle="target: .nav-overlay-m; animation: uk-animation-fade" href="#"></a>
+      
   </div>
+
+  
+      <div class="nav-overlay-m nav-overlay uk-navbar-left uk-flex-1" hidden>
+
+        <div class="uk-navbar-item uk-width-expand">
+            <Search />
+        </div>
+
+        <a class="uk-navbar-toggle" uk-close uk-toggle="target: .nav-overlay-m; animation: uk-animation-fade" href="#"></a>
+
+    </div>
 </nav>
 
 <nav class="uk-navbar uk-navbar-container uk-margin uk-hidden@m">
-    <div class="uk-navbar-left">
+    <div class="nav-overlay uk-navbar-left">
         <a class="uk-navbar-toggle" uk-navbar-toggle-icon uk-toggle="target: #offcanvas-nav" href="#"></a>
     </div>
-    <div class="uk-navbar-center">
+    <div class="nav-overlay uk-navbar-center">
       <a href="/" class="uk-logo uk-link-reset uk-text-muted">Girls For Future</a>
+    </div>
+    
+    <div class="nav-overlay uk-navbar-right">
+
+        <a class="uk-navbar-toggle" uk-search-icon uk-toggle="target: .nav-overlay; animation: uk-animation-fade" href="#"></a>
+
+    </div>
+
+    <div class="nav-overlay uk-navbar-left uk-flex-1" hidden>
+
+        <div class="uk-navbar-item uk-width-expand">
+            <Search />
+        </div>
+
+        <a class="uk-navbar-toggle" uk-close uk-toggle="target: .nav-overlay; animation: uk-animation-fade" href="#"></a>
+
     </div>
 </nav>
 

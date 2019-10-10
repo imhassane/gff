@@ -38,7 +38,7 @@
 </script>
 
 {#if error}
-    <h3 style="text-align:center">Aucun terme de recherche n'a été entré</h3>
+    <h3 class="uk-position-center">Aucun terme de recherche n'a été entré</h3>
 
 {:else}
 <div class="uk-container-expand uk-padding">

@@ -17,6 +17,7 @@
 	import Page from "./components/pages/Page.svelte";
 	import Category from "./components/categories/Category.svelte";
 	import Search from "./components/search/Search.svelte";
+	import EmptyPage from "./components/general/EmptyPage.svelte";
 
 	const client = new ApolloClient({ uri: 'http://localhost:4000/graphql '});
 	setClient(client);
@@ -27,14 +28,7 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.1.7/css/uikit.min.css" />
 </svelte:head>
 
-<style>
-	body, * {
-		margin: 0; padding: 0;
-	}
-</style>
-
-<body>
-	<div>
+<div>
 		<Navbar />
 		<div class="uk-padding uk-padding-remove-left uk-padding-remove-right" uk-height-viewport>
 			<Router>
@@ -49,9 +43,8 @@
 
 				<Route exact path="{ROUTER.CATEGORY_DETAIL(":_id")}" component={Category} />
 				<Route exact path="{ROUTER.SEARCH}" component={Search} />
+				<Route path="*" component={EmptyPage} message="Désolé cette page n'existe pas" />
 			</Router>
 		</div>
 		<Footer />
-	</div>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.1.7/js/uikit.min.js"></script>
-</body>
+</div>
