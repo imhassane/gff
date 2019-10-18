@@ -28,3 +28,9 @@ export const PostFileUploadResume = ({ data }) => (
         <hr />
     </React.Fragment>
 );
+
+export const SelectedPicture = ({ data: { path }, onSelected }) => (
+    <div>
+        <img onClick={ _ => onSelected(path) } src={path} alt={path} />
+    </div>
+);

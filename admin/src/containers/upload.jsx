@@ -1,14 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import S3 from "react-s3";
 import S3Config from "../config/aws";
 
 import client from "../config/apollo";
 import gql  from "graphql-tag";
 
-import { PostFileUploadForm, PostFileUploadResume } from "../components/upload";
+import { PostFileUploadForm, PostFileUploadResume, SelectedPicture } from "../components/upload";
 import { Title } from "../components/utility";
 import routes from "../routes";
 import { Messages } from "../components/messages";
+import Loader from "../components/loader";
+import useModal from "react-hooks-use-modal";
 
 export class PostFileUpload extends React.Component {
     constructor(props) {
@@ -87,6 +89,52 @@ export const UserPictureUpdate = props => {
     );
 }
 
+export const SelectFile = props => {
+    const [pictures, setPictures] = useState([]);
+    const [selected, setSelected] = useState(null);
+    const [messages, setMessages] = useState({});
+    const [Modal, open, close] = useModal('root');
+
+    const setSelectedPicture = path => setSelected(path);
+
+    useEffect(() => {
+        const getPictures = async () => {
+            try {
+                const { data: { pictures } } = await client.query({ query: PICTURES });
+                setPictures(pictures);
+            } catch({ message }) { setMessages({ error: message }); }
+        }
+        getPictures();
+    });
+
+    if(!pictures.length) return <Loader />;
+
+    let _pictures = pictures.map((d, k) => <SelectedPicture onSelected={setSelectedPicture} data={d} key={k} />);
+    
+    return (
+        <div className="uk-margin">
+            <button onClick={open}>Choisir un fichier</button>
+            <Modal>
+                <div className="uk-container" style={{ overflow: 'scroll' }}>
+                    <button onClick={close}>Fermer</button>
+                    <Messages error={messages.error} />
+                    { selected && (
+                        <p>
+                            <img width="40" height="40" src={selected} alt={selected} />
+                            <span>{selected}</span>
+                        </p>
+                    )}
+                    <div>
+                        <div className="uk-grid-small uk-child-width-1-5@m uk-child-width-1-3@s" uk-grid="masonry:true">
+                            { _pictures }
+                        </div>
+                    </div>
+                </div>
+            </Modal>
+        </div>
+    );
+}
+
 const CREATE_PICTURE = gql`
     mutation CreatePicture($path: String!){
         createPicture(type: "POST", path: $path) {
@@ -100,6 +148,15 @@ const UPDATE_PICTURE = gql`
     mutation UpdatePicture($_id: ID!) {
         updateUserPicture(_id: $_id) {
             username
+        }
+    }
+`;
+
+const PICTURES = gql`
+    {
+        pictures(type: "POST") {
+            _id
+            path
         }
     }
 `;

@@ -5,7 +5,7 @@ import draftToHtml from 'draftjs-to-html';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import { TagFinder } from "./tag";
 import { ChooseCategory } from "./category";
-import { PostFileUpload, PostUploaded } from "./upload";
+import { PostFileUpload, PostUploaded, SelectFile } from "./upload";
 import { PostPlanning } from "../components/planning";
 import Loader from "../components/loader";
 import client from "../config/apollo";
@@ -98,6 +98,9 @@ export class CreatePost extends React.Component {
                             <ChooseCategory onCategorySelect={this.handleCategorySelected} />
                         </div>
                         <div className="uk-margin-small">
+                            <strong>Choisir un fichier</strong>
+                            <SelectFile />
+                            <hr/>
                             <strong>Ajouter des fichiers</strong>
                             <PostFileUpload onPictureUpload={this.handlePictureUpload} />
                             <PostUploaded uploads={this.state.pictures} />
